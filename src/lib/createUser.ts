@@ -1,5 +1,5 @@
 import { createClient } from "@supabase/supabase-js";
-import { supabase } from "@/integrations/supabase/client";
+import { supabase, SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY } from "@/integrations/supabase/client";
 
 interface CreateUserParams {
     email: string;
@@ -24,8 +24,8 @@ export const createUserInBothSystems = async (params: CreateUserParams): Promise
 
     // Create a temporary client to sign up the new user without logging out the admin
     const tempClient = createClient(
-        import.meta.env.VITE_SUPABASE_URL,
-        import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY,
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY,
         {
             auth: {
                 persistSession: false,
