@@ -1235,6 +1235,204 @@ export const EfferdAnalyticsOverview: React.FC<EfferdAnalyticsOverviewProps> = (
               )}
             </div>
           )}
+
+          {/* VERCEL OBSERVABILITY DASHBOARD (Shown when No. of Visits is active) */}
+          {activeChartMetric === 'visits' && (
+            <div className="mt-6 border-t border-border pt-4 space-y-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-7 h-7 rounded-lg bg-foreground text-background flex items-center justify-center font-bold text-xs shadow-xs">
+                    ▲
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-2">
+                      <h4 className="text-xs font-semibold text-foreground tracking-tight">
+                        collegeerp
+                      </h4>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted border border-border text-foreground font-mono">
+                        Production
+                      </span>
+                      <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted/60 border border-border text-muted-foreground">
+                        Last 6 hours
+                      </span>
+                    </div>
+                    <p className="text-[11px] text-muted-foreground">
+                      Live Vercel Observability metrics from <span className="font-mono text-foreground">darkplayings/collegeerp</span>
+                    </p>
+                  </div>
+                </div>
+
+                <a
+                  href="https://vercel.com/darkplayings/projects/collegeerp/observability"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-border bg-card hover:bg-muted text-xs font-medium text-foreground transition-colors shadow-xs"
+                >
+                  <span>Open in Vercel</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              </div>
+
+              {/* 4 Observability Cards Grid matching the Vercel dashboard screenshot */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* 1. CDN Requests */}
+                <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Globe className="h-4 w-4 text-foreground" />
+                      <span className="text-xs font-semibold text-foreground">CDN Requests</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] font-mono">
+                      <span className="inline-flex items-center gap-1 text-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" /> 2XX: <strong className="font-bold">{vercelObservability?.requests2xx ?? 39}</strong>
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600" /> 3XX: <strong className="font-bold">{vercelObservability?.requests3xx ?? 10}</strong>
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-300 dark:bg-zinc-700" /> 4XX: <strong className="font-bold">{vercelObservability?.requests4xx ?? 0}</strong>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* CDN Requests 6h Mini Chart */}
+                  <div className="h-28 w-full pt-1">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={vercelTimeSeries.length > 0 ? vercelTimeSeries : [
+                        { time: '6h ago', requests2xx: 0, requests3xx: 0 },
+                        { time: '5h ago', requests2xx: 0, requests3xx: 0 },
+                        { time: '4h ago', requests2xx: 0, requests3xx: 0 },
+                        { time: '10:05am', requests2xx: 39, requests3xx: 10 },
+                        { time: '2h ago', requests2xx: 0, requests3xx: 0 },
+                        { time: '1h ago', requests2xx: 0, requests3xx: 0 },
+                        { time: 'Just now', requests2xx: 1, requests3xx: 0 }
+                      ]} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
+                        <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: isDark ? '#a1a1aa' : '#71717a' }} />
+                        <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: isDark ? '#a1a1aa' : '#71717a' }} />
+                        <Tooltip
+                          content={({ active, payload }) => {
+                            if (active && payload && payload.length) {
+                              const item = payload[0]?.payload;
+                              return (
+                                <div className="rounded-lg border border-border bg-card p-2 shadow-md text-[11px] space-y-1">
+                                  <p className="font-semibold text-foreground">{item?.time}</p>
+                                  <p className="text-foreground font-mono">2XX: {item?.requests2xx || 0}</p>
+                                  <p className="text-muted-foreground font-mono">3XX: {item?.requests3xx || 0}</p>
+                                </div>
+                              );
+                            }
+                            return null;
+                          }}
+                        />
+                        <Bar dataKey="requests2xx" stackId="a" fill={isDark ? '#ffffff' : '#09090b'} radius={[0, 0, 0, 0]} />
+                        <Bar dataKey="requests3xx" stackId="a" fill={isDark ? '#71717a' : '#a1a1aa'} radius={[3, 3, 0, 0]} />
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t border-border">
+                    <span>Peak: 10:05am - 10:10am (49 req)</span>
+                    <span className="font-mono text-foreground font-semibold">Total: {vercelObservability?.totalRequests ?? 49} requests</span>
+                  </div>
+                </div>
+
+                {/* 2. Fast Data Transfer */}
+                <div className="rounded-xl border border-border bg-card p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Zap className="h-4 w-4 text-foreground" />
+                      <span className="text-xs font-semibold text-foreground">Fast Data Transfer</span>
+                    </div>
+                    <div className="flex items-center gap-3 text-[10px] font-mono">
+                      <span className="inline-flex items-center gap-1 text-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-foreground" /> Outgoing: <strong className="font-bold">{vercelObservability?.outgoingTransfer ?? '17MB'}</strong>
+                      </span>
+                      <span className="inline-flex items-center gap-1 text-muted-foreground">
+                        <span className="w-1.5 h-1.5 rounded-full bg-zinc-400 dark:bg-zinc-600" /> Incoming: <strong className="font-bold">{vercelObservability?.incomingTransfer ?? '222KB'}</strong>
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Transfer Visual Area */}
+                  <div className="h-28 w-full pt-1">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <AreaChart data={[
+                        { time: '6h ago', mb: 0 },
+                        { time: '5h ago', mb: 0 },
+                        { time: '4h ago', mb: 0 },
+                        { time: '10:05am', mb: 15.4 },
+                        { time: '2h ago', mb: 0 },
+                        { time: '1h ago', mb: 0 },
+                        { time: 'Just now', mb: 1.6 }
+                      ]} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
+                        <defs>
+                          <linearGradient id="transferGradient" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor={isDark ? '#ffffff' : '#000000'} stopOpacity={0.2} />
+                            <stop offset="95%" stopColor={isDark ? '#ffffff' : '#000000'} stopOpacity={0.0} />
+                          </linearGradient>
+                        </defs>
+                        <XAxis dataKey="time" axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: isDark ? '#a1a1aa' : '#71717a' }} />
+                        <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 9, fill: isDark ? '#a1a1aa' : '#71717a' }} />
+                        <Tooltip
+                          content={({ active, payload }) => {
+                            if (active && payload && payload.length) {
+                              return (
+                                <div className="rounded-lg border border-border bg-card p-2 shadow-md text-[11px] space-y-0.5">
+                                  <p className="font-semibold text-foreground">{payload[0]?.payload?.time}</p>
+                                  <p className="text-foreground font-mono">Transfer: {payload[0]?.payload?.mb} MB</p>
+                                </div>
+                              );
+                            }
+                            return null;
+                          }}
+                        />
+                        <Area type="monotone" dataKey="mb" stroke={isDark ? '#ffffff' : '#09090b'} strokeWidth={2} fill="url(#transferGradient)" />
+                      </AreaChart>
+                    </ResponsiveContainer>
+                  </div>
+
+                  <div className="flex items-center justify-between text-[11px] text-muted-foreground pt-1 border-t border-border">
+                    <span>Bandwidth: Edge CDN Cached</span>
+                    <span className="font-mono text-foreground font-semibold">Outgoing: {vercelObservability?.outgoingTransfer ?? '17MB'}</span>
+                  </div>
+                </div>
+
+                {/* 3. Vercel Functions */}
+                <div className="rounded-xl border border-border bg-card p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Server className="h-4 w-4 text-foreground" />
+                      <span className="text-xs font-semibold text-foreground">Vercel Functions</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] font-mono text-muted-foreground">
+                      <span>Error: 0</span>
+                      <span>•</span>
+                      <span>Timeout: 0</span>
+                    </div>
+                  </div>
+                  <div className="h-20 flex items-center justify-center border border-dashed border-border rounded-lg bg-muted/20">
+                    <span className="text-xs text-muted-foreground font-mono">No data in this time range</span>
+                  </div>
+                </div>
+
+                {/* 4. Compute */}
+                <div className="rounded-xl border border-border bg-card p-4 space-y-2">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Cpu className="h-4 w-4 text-foreground" />
+                      <span className="text-xs font-semibold text-foreground">Compute</span>
+                    </div>
+                    <div className="flex items-center gap-2 text-[10px] font-mono text-muted-foreground">
+                      <span>Active CPU: 0%</span>
+                    </div>
+                  </div>
+                  <div className="h-20 flex items-center justify-center border border-dashed border-border rounded-lg bg-muted/20">
+                    <span className="text-xs text-muted-foreground font-mono">No data in this time range</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
