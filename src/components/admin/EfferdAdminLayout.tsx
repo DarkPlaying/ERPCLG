@@ -152,9 +152,14 @@ export const EfferdAdminLayout: React.FC<EfferdAdminLayoutProps> = ({
               </div>
             </div>
             {sidebarOpen && (
-              <span className="font-semibold text-base tracking-tight truncate">
-                Efferd
-              </span>
+              <div className="flex flex-col min-w-0">
+                <span className="font-semibold text-sm tracking-tight truncate leading-tight">
+                  College ERP
+                </span>
+                <span className="text-[10px] text-muted-foreground truncate leading-tight">
+                  Admin Portal
+                </span>
+              </div>
             )}
           </div>
 
@@ -167,48 +172,6 @@ export const EfferdAdminLayout: React.FC<EfferdAdminLayoutProps> = ({
             <X className="h-4 w-4" />
           </Button>
         </div>
-
-        {/* Workspace Selector Dropdown */}
-        {sidebarOpen ? (
-          <div className="p-3 border-b border-border/60">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <button className="w-full flex items-center justify-between px-2.5 py-2 rounded-xl bg-muted/50 hover:bg-muted border border-border/50 text-left transition-all">
-                  <div className="flex items-center gap-2.5 min-w-0">
-                    <span className="relative flex h-3 w-3">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                      <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-                    </span>
-                    <span className="text-xs font-medium truncate">{selectedWorkspace}</span>
-                  </div>
-                  <ChevronDown className="h-3.5 w-3.5 text-muted-foreground flex-shrink-0" />
-                </button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="start" className="w-56">
-                <DropdownMenuLabel className="text-xs text-muted-foreground">Workspaces</DropdownMenuLabel>
-                <DropdownMenuItem onClick={() => setSelectedWorkspace('Efferd Admin')} className="flex items-center justify-between text-xs">
-                  <span>Efferd Admin</span>
-                  {selectedWorkspace === 'Efferd Admin' && <Check className="h-3.5 w-3.5 text-emerald-500" />}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSelectedWorkspace('College ERP Campus')} className="flex items-center justify-between text-xs">
-                  <span>College ERP Campus</span>
-                  {selectedWorkspace === 'College ERP Campus' && <Check className="h-3.5 w-3.5 text-emerald-500" />}
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => setSelectedWorkspace('Production Cluster')} className="flex items-center justify-between text-xs">
-                  <span>Production Cluster</span>
-                  {selectedWorkspace === 'Production Cluster' && <Check className="h-3.5 w-3.5 text-emerald-500" />}
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-        ) : (
-          <div className="py-3 flex justify-center border-b border-border/60">
-            <span className="relative flex h-3 w-3">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
-            </span>
-          </div>
-        )}
 
         {/* Sidebar Nav Items List */}
         <div className="flex-1 overflow-y-auto p-3 space-y-6 scrollbar-thin">
