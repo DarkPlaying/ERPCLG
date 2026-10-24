@@ -1,0 +1,642 @@
+{
+  "attendance": [
+    {
+      "id": "1vaFF5cbZHm1hE7GwyoW",
+      "workspaceId": "fGn8xTQumMbylIzv2K6u",
+      "teacherEmail": "john@example.com",
+      "presentStudents": [
+        {
+          "reg_no": "",
+          "va_no": "6309",
+          "name": "sanjay",
+          "email": "jane@example.com"
+        },
+        {
+          "email": "alice@example.com",
+          "va_no": "",
+          "name": "",
+          "reg_no": ""
+        }
+      ],
+      "date": "2025-12-08",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765178122,
+        "nanoseconds": 82000000
+      }
+    },
+    {
+      "id": "Ai44mTtRkNCXYN94P22U",
+      "workspaceId": "fGn8xTQumMbylIzv2K6u",
+      "presentStudents": [
+        {
+          "va_no": "6309",
+          "reg_no": "222308608",
+          "name": "sanjay",
+          "email": "jane@example.com"
+        }
+      ],
+      "date": "2025-12-12",
+      "teacherEmail": "john@example.com",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765472055,
+        "nanoseconds": 424000000
+      }
+    },
+    {
+      "id": "CTvcrzyMVXvEiN7X2Z8A",
+      "date": "2025-12-09",
+      "teacherEmail": "john@example.com",
+      "workspaceId": "fGn8xTQumMbylIzv2K6u",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765182704,
+        "nanoseconds": 802000000
+      },
+      "presentStudents": [
+        {
+          "reg_no": "",
+          "va_no": "",
+          "name": "",
+          "email": "alice@example.com"
+        }
+      ],
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180607,
+        "nanoseconds": 529000000
+      }
+    },
+    {
+      "id": "o9xUMMf79Kr3ADEtVmDS",
+      "teacherEmail": "john@example.com",
+      "presentStudents": [
+        {
+          "email": "jane@example.com",
+          "reg_no": "",
+          "va_no": "6309",
+          "name": "sanjay"
+        },
+        {
+          "name": "",
+          "email": "alice@example.com",
+          "va_no": "",
+          "reg_no": ""
+        }
+      ],
+      "workspaceId": "fGn8xTQumMbylIzv2K6u",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180612,
+        "nanoseconds": 28000000
+      },
+      "date": "2025-12-10"
+    }
+  ],
+  "marks": [
+    {
+      "id": "1IA7oX4GS86PzEYAL25O",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "deleted": false,
+      "sectionTitle": "test",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "studentEmail": "603@velsrscollege.com",
+      "type": "csv_upload",
+      "teacherEmail": "john@example.com",
+      "marks": "70",
+      "subject": "test"
+    },
+    {
+      "id": "22Zp6tDL1yKBkYQLESA1",
+      "type": "csv_upload",
+      "sectionTitle": "test",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "teacherEmail": "john@example.com",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "deleted": false,
+      "studentEmail": "jane@example.com",
+      "marks": "70",
+      "subject": "test"
+    },
+    {
+      "id": "3ZTrSWifIyGJ0fY2DtXP",
+      "subject": "test",
+      "marks": "70",
+      "teacherEmail": "john@example.com",
+      "sectionTitle": "test",
+      "type": "csv_upload",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "studentEmail": "608@velsrscollege.com",
+      "deleted": false,
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU"
+    },
+    {
+      "id": "JAfOVSYXJvQEPkCudGTI",
+      "studentEmail": "602@velsrscollege.com",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "marks": "70",
+      "type": "csv_upload",
+      "sectionTitle": "test",
+      "teacherEmail": "john@example.com",
+      "subject": "test",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "deleted": false
+    },
+    {
+      "id": "YXfPow6iW9KpVLiHxGmX",
+      "teacherEmail": "john@example.com",
+      "studentEmail": "605@velsrscollege.com",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "deleted": false,
+      "marks": "70",
+      "subject": "test",
+      "type": "csv_upload",
+      "sectionTitle": "test"
+    },
+    {
+      "id": "aAc9HCzkGybfBuTM7eU5",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "studentEmail": "609@velsrscollege.com",
+      "teacherEmail": "john@example.com",
+      "subject": "test",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "marks": "70",
+      "type": "csv_upload",
+      "deleted": false,
+      "sectionTitle": "test"
+    },
+    {
+      "id": "i3cuel1WN3XQegzJXC4R",
+      "type": "csv_upload",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "sectionTitle": "test",
+      "deleted": false,
+      "studentEmail": "606@velsrscollege.com",
+      "teacherEmail": "john@example.com",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "subject": "test",
+      "marks": "70"
+    },
+    {
+      "id": "jeu565EBDV1NuH5PJiXr",
+      "sectionTitle": "test",
+      "subject": "test",
+      "studentEmail": "607@velsrscollege.com",
+      "teacherEmail": "john@example.com",
+      "marks": "70",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "type": "csv_upload",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "deleted": false
+    },
+    {
+      "id": "kCjbpvsdDkI52W2MuANZ",
+      "teacherEmail": "john@example.com",
+      "sectionTitle": "test",
+      "type": "csv_upload",
+      "deleted": false,
+      "subject": "test",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "studentEmail": "alice@example.com",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "marks": "70"
+    },
+    {
+      "id": "qS3WCbpzt82QGj9hOlX9",
+      "teacherEmail": "john@example.com",
+      "subject": "test",
+      "type": "csv_upload",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "studentEmail": "610@velsrscollege.com",
+      "deleted": false,
+      "sectionTitle": "test",
+      "marks": "70"
+    },
+    {
+      "id": "r8O2YdBZItlm49t6fpY2",
+      "teacherEmail": "john@example.com",
+      "sectionTitle": "test",
+      "subject": "test",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "marks": "70",
+      "deleted": false,
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "type": "csv_upload",
+      "studentEmail": "601@velsrscollege.com"
+    },
+    {
+      "id": "uFoaLiMILFEDarFxHnpz",
+      "marks": "70",
+      "teacherEmail": "john@example.com",
+      "deleted": false,
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "subject": "test",
+      "sectionTitle": "test",
+      "studentEmail": "600@velsrscollege.com",
+      "type": "csv_upload",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU"
+    },
+    {
+      "id": "yuHotsUYawL5kpyGXvh8",
+      "deleted": false,
+      "teacherEmail": "john@example.com",
+      "subject": "test",
+      "marks": "70",
+      "type": "csv_upload",
+      "batchId": "4ZiZnXfrkYAHl3wjcnbU",
+      "publishedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180646,
+        "nanoseconds": 828000000
+      },
+      "studentEmail": "604@velsrscollege.com",
+      "sectionTitle": "test"
+    }
+  ],
+  "unom_reports": [
+    {
+      "id": "Qd3y7YseCeUkk9WdBTPe",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180860,
+        "nanoseconds": 276000000
+      },
+      "workspaceId": "fGn8xTQumMbylIzv2K6u",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765180686,
+        "nanoseconds": 947000000
+      },
+      "status": "active",
+      "labSubjects": [
+        "os lab",
+        "rdbms lab"
+      ],
+      "title": "sem 1",
+      "teacherEmail": "john@example.com",
+      "subjects": [
+        "os",
+        "rdbms",
+        "cn",
+        "se",
+        "os lab",
+        "rdbms lab"
+      ],
+      "link": "",
+      "data": [
+        {
+          "rdbms lab_external": "60",
+          "rank": 1,
+          "se_internal": "20",
+          "se_external": "60",
+          "os lab_internal": "40",
+          "email": "jane@example.com",
+          "hasUpdated": false,
+          "rdbms_external": "70",
+          "os_internal": "20",
+          "os_external": "70",
+          "os lab_external": "60",
+          "os": "90",
+          "submittedAt": "2025-12-08T08:01:00.137Z",
+          "se": "80",
+          "total": 543,
+          "os lab": "100",
+          "rdbms lab": "100",
+          "rdbms lab_internal": "40",
+          "cn": "83",
+          "percentage": 90.5,
+          "cn_internal": "25",
+          "rdbms": "90",
+          "cn_external": "58",
+          "rdbms_internal": "20"
+        },
+        {
+          "percentage": 0,
+          "hasUpdated": false,
+          "cn": null,
+          "rdbms": null,
+          "rank": 2,
+          "os lab": null,
+          "total": 0,
+          "se": null,
+          "os": null,
+          "rdbms lab": null,
+          "email": "alice@example.com"
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "4ueWqzmZ6zViP0W4GfGpEncWUZM2",
+      "department": "BSC",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765470710,
+        "nanoseconds": 229000000
+      },
+      "role": "student",
+      "full_name": "test",
+      "password": "$2b$10$dF/WK4EPbMHk2anoob0xduWhQXNoX8EHsr/lapYzz1IyRgWrMBhqu",
+      "email": "test@gmail.com",
+      "email_lower": "test@gmail.com",
+      "assignedWorkspaces": []
+    },
+    {
+      "id": "5VEWhLYdnBO6sFm8UQ0vT6UB4LM2",
+      "lower_email": "sanjay@gmail.com",
+      "password": "Dark1123@#",
+      "role": "admin",
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1767260656,
+        "nanoseconds": 824000000
+      },
+      "email": "sanjay@gmail.com",
+      "activeSessionId": "sess-1767260651930-aa0aa76edf23df88"
+    },
+    {
+      "id": "LHdPUtpuMTaLVFboPiwp2QKc8a03",
+      "password": "$2b$10$hOiOKtIfpDPtGf1qz822Jub6kJwd7uInxi8mj03xKQsIkfLQQhDmu",
+      "email_lower": "alice@example.com",
+      "activeSessionId": "sess-1765196324051-7223b0082d38a18",
+      "full_name": "Alice Williams",
+      "fcmToken": "eorGZjYCum82zrqUaDga_Y:APA91bFxWSecXCC4vjamn2ZHFXlREVYLIbI1T3_B9YpdXY3R3DJU0iHp1os_GqaEpfBFkjZoJnnyHGHiTfvs4NPNXtGNHXlYlc-5Ja2J44WGzPHQKdUX6Lw",
+      "batch_year": "2023 - 2025",
+      "va_no": "6266",
+      "role": "student",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765385217,
+        "nanoseconds": 991000000
+      },
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765208038,
+        "nanoseconds": 266000000
+      },
+      "date_of_birth": "2006-04-23",
+      "uploadedViaCSV": true,
+      "email": "alice@example.com",
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765196324,
+        "nanoseconds": 110000000
+      },
+      "assignedWorkspaces": [
+        "fGn8xTQumMbylIzv2K6u"
+      ],
+      "department": "Mathematics",
+      "profileUpdatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765208038,
+        "nanoseconds": 266000000
+      },
+      "personal_mobile": "9840193318",
+      "name": "kabilan"
+    },
+    {
+      "id": "j6t3Eu1e5yM88acPJIYmEcee44k1",
+      "email_lower": "sanjay23@gamil.com",
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766847150,
+        "nanoseconds": 22000000
+      },
+      "password": "$2b$10$kiqMZm.rou4SUDz.ulW7I.ffxeK8vqziQ8TOoW/L1VOEaVFARrWBK",
+      "faceDescriptor": null,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766763063,
+        "nanoseconds": 662000000
+      },
+      "hasFace": false,
+      "role": "teacher",
+      "email": "sanjay23@gamil.com",
+      "assignedWorkspaces": [],
+      "full_name": "test 2",
+      "department": "-",
+      "activeSessionId": "sess-1766847148137-13bebb31dd4624e2"
+    },
+    {
+      "id": "lyot4o4SsAeuwIQtkr0aH5iILaM2",
+      "va_no": "6309",
+      "date_of_birth": "2025-12-23",
+      "batch_year": "2023 - 2026",
+      "fcmToken": "f3Lby0Rppr_PO4KRoxszEs:APA91bHq5zKlEv7Esr0xeRIlV0btvsjJrqHkqyUTBI30TsixchsFPT9NhK3NkrBCQncqj_tv9CDRCRGKwDTiYmDlICwzyD1o6a10Pqy9ZfHDXLaAvFEUTww",
+      "activeSessionId": "sess-1766677955057-7198a243b89e25fa",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766904894,
+        "nanoseconds": 66000000
+      },
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766677955,
+        "nanoseconds": 625000000
+      },
+      "profileUpdatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766904894,
+        "nanoseconds": 66000000
+      },
+      "reg_no": "222308608",
+      "address": "No. 15 ",
+      "email": "jane@example.com",
+      "department": "bsc",
+      "full_name": "Jane Smith",
+      "uploadedViaCSV": true,
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766408719,
+        "nanoseconds": 301000000
+      },
+      "personal_mobile": "8438509355",
+      "role": "student",
+      "photoURL": "https://lh3.googleusercontent.com/d/1qf3pLBXCtdRGZ5hg_52LSmPhBxzBBy2M",
+      "assignedWorkspaces": [
+        "fGn8xTQumMbylIzv2K6u"
+      ],
+      "email_lower": "jane@example.com",
+      "name": "sanjay",
+      "password": "$2b$10$xbQEFdM4inRV9Yo3VnJjL.ciM/Cyt2jn35MkcPYE3nVK6vkYgFt4S"
+    },
+    {
+      "id": "tOE1AOn4XmhrCZDWf1YFhpiJCvF2",
+      "full_name": "sanjay M",
+      "portalStatus": "open",
+      "date_of_birth": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1764806400,
+        "nanoseconds": 0
+      },
+      "email": "john@example.com",
+      "role": "teacher",
+      "name": "sanjay M",
+      "profile_picture": "https://lh3.googleusercontent.com/d/1IbHl9J55LrqBG8gqFFEJ3lrJjJgjAgAA",
+      "address": "no.15, St Joseph Nagar Rd, Saint Joseph Nagar, Attavar, Mangaluru, Karnataka, India, 575002",
+      "email_lower": "john@example.com",
+      "faceDescriptor": null,
+      "activeSessionId": "sess-1767186377702-4814c745f25851b8",
+      "current_salary": "12",
+      "updatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766906884,
+        "nanoseconds": 938000000
+      },
+      "profileUpdatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766904838,
+        "nanoseconds": 435000000
+      },
+      "department": "BSC",
+      "vta_no": "610",
+      "assignedWorkspaces": [],
+      "uploadedViaCSV": true,
+      "hasFace": false,
+      "personal_mobile": "08438509355",
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1767186383,
+        "nanoseconds": 837000000
+      },
+      "photoUrl": "https://lh3.googleusercontent.com/d/1IbHl9J55LrqBG8gqFFEJ3lrJjJgjAgAA",
+      "photoURL": "https://lh3.googleusercontent.com/d/1IbHl9J55LrqBG8gqFFEJ3lrJjJgjAgAA",
+      "date_of_joining": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1165622400,
+        "nanoseconds": 0
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766408716,
+        "nanoseconds": 327000000
+      },
+      "password": "$2b$10$LN2BUtK.V0uYT9EsAbim5.ttlzHd8tfNAFyFEljyBhP4LZcHdOlzW"
+    },
+    {
+      "id": "zdhc3s4feFMx5jun5eiWsuaOMW23",
+      "photoURL": "https://lh3.googleusercontent.com/d/1Uowho8-b_GUxZWcRucaV3lbSy3eJ81Yy",
+      "name": "kabilan",
+      "activeSessionTimestamp": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1767243873,
+        "nanoseconds": 337000000
+      },
+      "address": "No.100 GPD",
+      "photoUrl": "https://lh3.googleusercontent.com/d/1Uowho8-b_GUxZWcRucaV3lbSy3eJ81Yy",
+      "profile_picture": "https://lh3.googleusercontent.com/d/1Uowho8-b_GUxZWcRucaV3lbSy3eJ81Yy",
+      "full_name": "kabilan",
+      "date_of_birth": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1148342400,
+        "nanoseconds": 0
+      },
+      "profileUpdatedAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1766940095,
+        "nanoseconds": 72000000
+      },
+      "faceDescriptor": "[-0.22289647161960602,0.08637264370918274,0.01698329485952854,-0.04564237222075462,-0.04644850641489029,-0.07071108371019363,0.0007300020079128444,-0.1005634143948555,0.1510981321334839,-0.04300309717655182,0.2750638425350189,-0.03780808672308922,-0.1917179971933365,-0.14232192933559418,0.01618678867816925,0.07019303739070892,-0.20875923335552216,-0.09008900076150894,-0.038373518735170364,-0.09311606734991074,0.006367540918290615,-0.03907161206007004,0.07190942019224167,0.09761827439069748,-0.17635974287986755,-0.32532599568367004,-0.12648296356201172,-0.11648151278495789,0.058661285787820816,-0.0886954814195633,-0.04593875631690025,-0.014775768853724003,-0.16095636785030365,-0.06746380031108856,-0.03048352152109146,0.1221507117152214,0.016783926635980606,-0.012740404345095158,0.16764236986637115,0.005578562617301941,-0.09898527711629868,-0.1198480948805809,0.03564850240945816,0.311161607503891,0.1708189845085144,0.046997684985399246,0.02793540433049202,-0.0042248377576470375,0.07192119210958481,-0.2090836465358734,0.09107035398483276,0.10275235772132874,0.15864375233650208,0.007962868548929691,0.03508127108216286,-0.17963698506355286,-0.01438723225146532,0.0875529944896698,-0.09814074635505676,0.03994942829012871,0.02273162454366684,-0.03619157150387764,-0.021302618086338043,0.01242641918361187,0.31324031949043274,0.10390246659517288,-0.14793424308300018,-0.09188111871480942,0.1697131097316742,-0.10410821437835693,-0.018978096544742584,0.05231300741434097,-0.10898246616125107,-0.17392057180404663,-0.3356929123401642,0.0924961045384407,0.45261305570602417,0.08221571892499924,-0.16847792267799377,-0.006067606154829264,-0.21044297516345978,-0.042397040873765945,0.002388731576502323,0.04895167797803879,-0.1791892647743225,0.07286602258682251,-0.20944331586360931,0.023210646584630013,0.17318260669708252,-0.010466261766850948,-0.03290126845240593,0.17098204791545868,0.02880668453872204,0.07658499479293823,0.06665883958339691,0.029309574514627457,-0.1202511191368103,0.006098106503486633,-0.09406840056180954,0.0026120946276932955,0.08006883412599564,-0.1369050145149231,-0.005296018440276384,0.12018406391143799,-0.22973531484603882,0.13952727615833282,0.07587656378746033,-0.06641312688589096,-0.030925102531909943,0.030399253591895103,-0.14177146553993225,-0.09266383200883865,0.15221025049686432,-0.28917112946510315,0.09690511971712112,0.20819558203220367,0.10708339512348175,0.22978712618350983,0.09205090999603271,0.06548905372619629,-0.012533114291727543,0.03089250437915325,-0.06432368606328964,0.0016330410726368427,0.005415415856987238,-0.06472118198871613,0.04843585193157196,0.0874042958021164]",
+      "assignedWorkspaces": [
+        "fGn8xTQumMbylIzv2K6u"
+      ],
+      "uploadedViaCSV": true,
+      "email": "bob@example.com",
+      "email_lower": "bob@example.com",
+      "activeSessionId": "sess-1767243872979-35e1da05d544499",
+      "hasFace": true,
+      "password": "$2b$10$0yAFGXf0bM55EndGwZoB6uMHIehEL15Ycxj/bQe7Pd8kZHDb/ZFwK",
+      "role": "teacher",
+      "personal_mobile": "8438509355",
+      "date_of_joining": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1767312000,
+        "nanoseconds": 0
+      },
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765385215,
+        "nanoseconds": 590000000
+      },
+      "vta_no": "590",
+      "registeredFace": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAKAAeADASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAf/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AJ+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/2Q==",
+      "current_salary": "20000",
+      "department": "BSC"
+    }
+  ],
+  "workspaces": [
+    {
+      "id": "fGn8xTQumMbylIzv2K6u",
+      "category": "CS",
+      "students": [
+        "alice@example.com",
+        "jane@example.com"
+      ],
+      "classTeacher": "john@example.com",
+      "mentor": "john@example.com",
+      "adminId": "sanjay@gmail.com",
+      "name": "Test Users",
+      "createdAt": {
+        "type": "firestore/timestamp/1.0",
+        "seconds": 1765165925,
+        "nanoseconds": 172000000
+      },
+      "teachers": [
+        "bob@example.com",
+        "john@example.com"
+      ]
+    }
+  ]
+}

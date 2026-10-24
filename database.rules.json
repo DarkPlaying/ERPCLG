@@ -1,0 +1,23 @@
+{
+    "rules": {
+        "status": {
+            ".read": "auth != null",
+            "$uid": {
+                ".write": "$uid === auth.uid",
+                ".validate": "newData.hasChildren(['state', 'last_changed'])"
+            }
+        },
+        "notifications": {
+            "$uid": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+            }
+        },
+        "users": {
+            "$uid": {
+                ".read": "$uid === auth.uid",
+                ".write": "$uid === auth.uid"
+            }
+        }
+    }
+}

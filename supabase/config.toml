@@ -1,0 +1,10 @@
+project_id = "qefqlfrqsbnalfjqzwxj"
+
+[functions.generate-test]
+verify_jwt = true
+
+[functions.parse-document]
+verify_jwt = true
+
+[auth]
+leaked_passwords_protection = true
