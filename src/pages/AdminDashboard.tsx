@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { DashboardLayout } from '@/components/DashboardLayout';
+import { EfferdAdminLayout } from '@/components/admin/EfferdAdminLayout';
+import { EfferdAnalyticsOverview } from '@/components/admin/EfferdAnalyticsOverview';
+import { getCurrentUser } from '@/lib/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -129,6 +132,7 @@ interface QueryItem {
 import { AdminAttendanceManager } from '@/components/AdminAttendanceManager';
 
 const AdminDashboard = () => {
+  const currentUser = getCurrentUser();
   const [activeSection, setActiveSection] = useState('overview');
   const [users, setUsers] = useState<Profile[]>([]);
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -1901,210 +1905,29 @@ const AdminDashboard = () => {
   };
 
   return (
-    <DashboardLayout sidebarItems={sidebarItems} title="Admin Dashboard" headerContent={headerContent}>
-      {/* OVERVIEW SECTION */}
+    <EfferdAdminLayout
+      activeSection={activeSection}
+      onSectionChange={setActiveSection}
+      user={currentUser || { name: 'Administrator', role: 'admin' }}
+      sessionTimeLeft={sessionTimeLeft}
+      maintenanceMode={maintenanceMode}
+      onToggleMaintenance={toggleMaintenanceMode}
+      onRefresh={() => window.location.reload()}
+    >
+      {/* OVERVIEW SECTION - Efferd 7 Analytics */}
       {activeSection === 'overview' && (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                title: 'Total Users',
-                value: stats.users,
-                icon: Users,
-                color: 'text-blue-400',
-                bg: 'bg-blue-500/20',
-                gradient: 'bg-gradient-to-br from-blue-900 to-slate-900',
-                textColor: 'text-blue-200'
-              },
-              {
-                title: 'Students',
-                value: stats.students,
-                icon: GraduationCap,
-                color: 'text-emerald-400',
-                bg: 'bg-emerald-500/20',
-                gradient: 'bg-gradient-to-br from-emerald-900 to-slate-900',
-                textColor: 'text-emerald-200'
-              },
-              {
-                title: 'Teachers',
-                value: stats.teachers,
-                icon: School,
-                color: 'text-violet-400',
-                bg: 'bg-violet-500/20',
-                gradient: 'bg-gradient-to-br from-violet-900 to-slate-900',
-                textColor: 'text-violet-200'
-              },
-              {
-                title: 'Workspaces',
-                value: stats.workspaces,
-                icon: Briefcase,
-                color: 'text-amber-400',
-                bg: 'bg-amber-500/20',
-                gradient: 'bg-gradient-to-br from-amber-900/80 to-slate-900',
-                textColor: 'text-amber-200'
-              },
-            ].map((stat, index) => (
-              <Card key={index} className={`border-slate-700 ${stat.gradient} text-white shadow-lg hover:shadow-xl transition-all duration-200`}>
-                <CardContent className="p-6 flex items-center justify-between">
-                  <div>
-                    <p className={`${stat.textColor} text-sm font-medium`}>{stat.title}</p>
-                    <h3 className="text-4xl font-bold mt-2">{stat.value}</h3>
-                    <p className="text-xs text-slate-400 mt-1">+2.5% from last month</p>
-                  </div>
-                  <div className={`p-3 rounded-full ${stat.bg}`}>
-                    <stat.icon className={`h-8 w-8 ${stat.color}`} />
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* Left Column: Charts & Main Content (Spans 2 columns) */}
-            <div className="lg:col-span-2 space-y-6">
-              {/* User Growth Chart */}
-              <Card className="border-slate-800 bg-slate-900/50">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <LineChartIcon className="h-5 w-5 text-blue-500" />
-                    User Growth
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="h-[400px]">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <LineChart data={userGrowthData}>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#334155" vertical={false} />
-                      <XAxis
-                        dataKey="date"
-                        stroke="#94a3b8"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                      />
-                      <YAxis
-                        stroke="#94a3b8"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                        tickFormatter={(value) => `${value}`}
-                      />
-                      <Tooltip
-                        contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#f8fafc' }}
-                        itemStyle={{ color: '#f8fafc' }}
-                        cursor={{ stroke: '#334155', strokeWidth: 2 }}
-                      />
-                      <Line
-                        type="monotone"
-                        dataKey="users"
-                        stroke="#3b82f6"
-                        strokeWidth={3}
-                        dot={{ fill: '#3b82f6', strokeWidth: 2, r: 4, stroke: '#1e293b' }}
-                        activeDot={{ r: 6, strokeWidth: 0 }}
-                      />
-                    </LineChart>
-                  </ResponsiveContainer>
-                </CardContent>
-              </Card>
-
-              {/* Recent Operations */}
-              <Card className="border-slate-800 bg-slate-900/50">
-                <CardHeader>
-                  <CardTitle className="text-lg flex items-center gap-2">
-                    <RefreshCw className="h-5 w-5 text-green-400" /> Recent Operations
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="space-y-4">
-                    {recentOperations.slice(0, 6).map((op, i) => (
-                      <div key={i} className="flex items-center justify-between border-b border-slate-800 pb-2 last:border-0 last:pb-0">
-                        <div className="flex items-center gap-3">
-                          <div className={`w-2 h-2 rounded-full ${op.type === 'success' ? 'bg-green-500' : op.type === 'warning' ? 'bg-yellow-500' : 'bg-blue-500'}`} />
-                          <span className="text-sm font-medium text-slate-200">{op.action}</span>
-                        </div>
-                        <span className="text-xs text-slate-500">{op.time}</span>
-                      </div>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
-
-            {/* Right Column: Widgets (Spans 1 column) */}
-            <div className="space-y-6">
-              {/* Recently Used Card */}
-              <Card className="border-slate-800 bg-slate-900/50">
-                <CardHeader>
-                  <CardTitle className="text-lg font-medium text-blue-400">Quick Actions</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-3">
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start border-slate-700 hover:bg-slate-800 text-slate-300"
-                    onClick={() => setActiveSection('users')}
-                  >
-                    <Users className="mr-2 h-4 w-4 text-blue-500" /> Manage Users
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start border-slate-700 hover:bg-slate-800 text-slate-300"
-                    onClick={() => setShowAddDialog(true)}
-                  >
-                    <UserPlus className="mr-2 h-4 w-4 text-emerald-500" /> Add New User
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full justify-start border-slate-700 hover:bg-slate-800 text-slate-300"
-                    onClick={() => setActiveSection('workspaces')}
-                  >
-                    <Briefcase className="mr-2 h-4 w-4 text-amber-500" /> Workspaces
-                  </Button>
-                </CardContent>
-              </Card>
-
-              {/* Modern Calendar Card */}
-              <ModernCalendar
-                selected={date}
-                onSelect={(d) => setDate(d)}
-                className="w-full shadow-lg"
-              />
-
-              {/* Weather Card */}
-              <Card className="border-slate-800 bg-gradient-to-br from-slate-900 to-slate-800 overflow-hidden">
-                <CardHeader className="pb-2 flex flex-row items-center justify-between border-b border-white/5">
-                  <CardTitle className="text-sm font-medium text-slate-200 flex items-center gap-2">
-                    <CloudSun className="h-4 w-4 text-amber-500" /> Weather
-                  </CardTitle>
-                  <Button variant="ghost" size="icon" className="h-6 w-6 text-slate-400 hover:text-white" onClick={fetchWeather}>
-                    <RefreshCw className="h-3 w-3" />
-                  </Button>
-                </CardHeader>
-                <CardContent className="pt-4">
-                  {weather ? (
-                    <div className="flex flex-col items-center text-center">
-                      <div className="text-4xl font-bold text-white mb-1">{Math.round(weather.temperature)}°C</div>
-                      <div className="text-sm text-blue-400 font-medium mb-4">{weather.condition}</div>
-
-                      <div className="grid grid-cols-2 gap-4 w-full text-xs border-t border-white/10 pt-3">
-                        <div className="flex flex-col gap-1">
-                          <span className="text-slate-500">Wind</span>
-                          <span className="text-slate-300 font-medium">{weather.windspeed} km/h</span>
-                        </div>
-                        <div className="flex flex-col gap-1">
-                          <span className="text-slate-500">Location</span>
-                          <span className="text-slate-300 font-medium">New Delhi</span>
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center justify-center h-32 text-slate-500 text-sm">
-                      <Loader2 className="h-4 w-4 animate-spin mr-2" /> Loading...
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            </div>
-          </div>
-        </div>
+        <EfferdAnalyticsOverview
+          stats={stats}
+          userGrowthData={userGrowthData}
+          onNavigateSection={setActiveSection}
+          recentOperations={recentOperations}
+          onAddUser={() => setShowAddDialog(true)}
+          onUploadCsv={() => handleOpenCsvUpload()}
+          date={date}
+          setDate={setDate}
+          weather={weather}
+          fetchWeather={fetchWeather}
+        />
       )}
 
       {/* USERS SECTION (Existing) */}
@@ -3196,7 +3019,7 @@ const AdminDashboard = () => {
         config={confirmConfig}
         onClose={() => setConfirmConfig(prev => ({ ...prev, open: false }))}
       />
-    </DashboardLayout>
+    </EfferdAdminLayout>
   );
 };
 
