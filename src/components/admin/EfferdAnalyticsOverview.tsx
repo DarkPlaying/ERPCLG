@@ -1633,11 +1633,12 @@ export const EfferdAnalyticsOverview: React.FC<EfferdAnalyticsOverviewProps> = (
       </div>
 
       {/* PLATFORM UTILITIES & LIVE STATUS (Merged Actions & Weather, Calendar, Recent DB Logs) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* PLATFORM UTILITIES & LIVE STATUS (Merged Actions & Weather, Calendar, Recent DB Logs) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 items-stretch">
         {/* Column 1: Merged Quick Administrative Actions & Campus Weather */}
         <div className="rounded-2xl border border-border bg-card p-5 shadow-xs flex flex-col justify-between space-y-4">
-          <div>
-            <div className="flex items-center justify-between mb-3">
+          <div className="space-y-4">
+            <div className="flex items-center justify-between">
               <h3 className="text-xs font-semibold text-foreground tracking-tight flex items-center gap-1.5">
                 Quick Actions & Campus Weather
               </h3>
@@ -1648,69 +1649,78 @@ export const EfferdAnalyticsOverview: React.FC<EfferdAnalyticsOverviewProps> = (
               )}
             </div>
 
-            {/* Weather Mini Bar */}
-            <div className="mb-3 p-3 rounded-xl bg-muted/40 border border-border flex items-center justify-between">
-              <div className="flex items-center gap-2.5">
-                <CloudSun className="h-5 w-5 text-foreground shrink-0" />
-                <div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-base font-bold font-mono text-foreground leading-none">
-                      {weather ? `${Math.round(weather.temperature)}°C` : '28°C'}
-                    </span>
-                    <span className="text-[11px] text-muted-foreground capitalize">
-                      • {weather?.condition || 'Sunny Campus'}
-                    </span>
-                  </div>
-                  <p className="text-[10px] text-muted-foreground font-mono mt-0.5">
-                    Wind: {weather ? `${weather.windspeed} km/h` : '12 km/h'} • Operational
-                  </p>
+            {/* Expanded Weather Card - Generous Spacing & Perfect Fit */}
+            <div className="p-4 rounded-xl bg-muted/40 border border-border space-y-3">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-2 text-xs font-medium text-foreground">
+                  <CloudSun className="h-4 w-4 text-foreground" />
+                  <span>Campus Weather</span>
+                </div>
+                <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-muted border border-border text-foreground flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-foreground animate-pulse" />
+                  Campus Node
+                </span>
+              </div>
+
+              <div className="flex items-baseline justify-between pt-1">
+                <div className="flex items-baseline gap-2.5">
+                  <span className="text-3xl font-extrabold font-mono tracking-tight text-foreground leading-none">
+                    {weather?.temperature !== undefined ? `${Math.round(weather.temperature)}°C` : '23°C'}
+                  </span>
+                  <span className="text-sm font-semibold text-muted-foreground capitalize">
+                    • {weather?.condition || 'Clear'}
+                  </span>
                 </div>
               </div>
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-muted text-foreground border border-border">
-                Campus Node
-              </span>
+
+              <div className="flex items-center justify-between text-xs text-muted-foreground font-mono pt-2 border-t border-border/60">
+                <span className="flex items-center gap-1.5">
+                  Wind: {weather?.windspeed !== undefined ? `${weather.windspeed} km/h` : '7.3 km/h'} • Operational
+                </span>
+                <span className="text-[10px] text-muted-foreground font-mono">Live Node</span>
+              </div>
             </div>
 
             {/* Admin Action Buttons */}
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-2.5 pt-1">
               <Button
                 variant="outline"
                 size="sm"
                 onClick={onAddUser}
-                className="justify-start text-xs h-9 rounded-xl border-border hover:bg-muted font-medium"
+                className="justify-start text-xs h-10 rounded-xl border-border hover:bg-muted font-medium transition-all"
               >
-                <UserPlus className="mr-2 h-3.5 w-3.5 text-foreground" /> Add User
+                <UserPlus className="mr-2 h-4 w-4 text-foreground" /> Add User
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={onUploadCsv}
-                className="justify-start text-xs h-9 rounded-xl border-border hover:bg-muted font-medium"
+                className="justify-start text-xs h-10 rounded-xl border-border hover:bg-muted font-medium transition-all"
               >
-                <Upload className="mr-2 h-3.5 w-3.5 text-foreground" /> Upload CSV
+                <Upload className="mr-2 h-4 w-4 text-foreground" /> Upload CSV
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => onNavigateSection && onNavigateSection('teachers')}
-                className="justify-start text-xs h-9 rounded-xl border-border hover:bg-muted font-medium"
+                className="justify-start text-xs h-10 rounded-xl border-border hover:bg-muted font-medium transition-all"
               >
-                <GraduationCap className="mr-2 h-3.5 w-3.5 text-foreground" /> Teachers
+                <GraduationCap className="mr-2 h-4 w-4 text-foreground" /> Teachers
               </Button>
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => onNavigateSection && onNavigateSection('workspaces')}
-                className="justify-start text-xs h-9 rounded-xl border-border hover:bg-muted font-medium"
+                className="justify-start text-xs h-10 rounded-xl border-border hover:bg-muted font-medium transition-all"
               >
-                <Briefcase className="mr-2 h-3.5 w-3.5 text-foreground" /> Workspaces
+                <Briefcase className="mr-2 h-4 w-4 text-foreground" /> Workspaces
               </Button>
             </div>
           </div>
 
-          <div className="pt-2 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground">
+          <div className="pt-3 border-t border-border/60 flex items-center justify-between text-[11px] text-muted-foreground">
             <span>Role: Super Admin</span>
-            <span className="text-foreground font-medium flex items-center gap-1">
+            <span className="text-foreground font-medium flex items-center gap-1.5 font-mono">
               <span className="w-1.5 h-1.5 rounded-full bg-foreground animate-pulse" /> Protected
             </span>
           </div>
