@@ -174,59 +174,59 @@ Requirements:
 
     return (
         <div className="space-y-6 w-full">
-            <div className="flex flex-col gap-2">
-                <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-                    <TableIcon className="h-8 w-8 text-blue-500" />
+            <div className="flex flex-col gap-1.5">
+                <h1 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                    <TableIcon className="h-6 w-6 text-foreground" />
                     VANO User List Generator
                 </h1>
-                <p className="text-slate-400">Generate bulk user CSVs with optional AI-powered filtering and modification.</p>
+                <p className="text-xs text-muted-foreground">Generate bulk user CSVs with optional AI-powered filtering and modification.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 {/* Configuration Panel */}
-                <Card className="bg-slate-800 border-slate-700 text-white lg:col-span-1 h-fit">
-                    <CardHeader>
-                        <CardTitle>Configuration</CardTitle>
+                <Card className="bg-card border-border text-foreground lg:col-span-1 h-fit shadow-xs">
+                    <CardHeader className="pb-3 border-b border-border">
+                        <CardTitle className="text-sm font-semibold text-foreground">Configuration</CardTitle>
                     </CardHeader>
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 pt-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label>Start VANO</Label>
+                                <Label className="text-xs text-foreground font-medium">Start VANO</Label>
                                 <Input
                                     type="number"
                                     value={vanoStart}
                                     onChange={e => setVanoStart(e.target.value)}
-                                    className="bg-slate-900 border-slate-700"
+                                    className="bg-background border-border text-foreground h-9"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>End VANO</Label>
+                                <Label className="text-xs text-foreground font-medium">End VANO</Label>
                                 <Input
                                     type="number"
                                     value={vanoEnd}
                                     onChange={e => setVanoEnd(e.target.value)}
-                                    className="bg-slate-900 border-slate-700"
+                                    className="bg-background border-border text-foreground h-9"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Email Domain</Label>
+                            <Label className="text-xs text-foreground font-medium">Email Domain</Label>
                             <Input
                                 value={emailDomain}
                                 onChange={e => setEmailDomain(e.target.value)}
                                 placeholder="@yourcollege.com"
-                                className="bg-slate-900 border-slate-700"
+                                className="bg-background border-border text-foreground h-9"
                             />
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Password Complexity</Label>
+                            <Label className="text-xs text-foreground font-medium">Password Complexity</Label>
                             <Select value={passwordType} onValueChange={setPasswordType}>
-                                <SelectTrigger className="bg-slate-900 border-slate-700">
+                                <SelectTrigger className="bg-background border-border text-foreground h-9">
                                     <SelectValue />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-card border-border text-foreground">
                                     <SelectItem value="simple">Simple (Alphanumeric)</SelectItem>
                                     <SelectItem value="complex">Complex (Special Chars)</SelectItem>
                                 </SelectContent>
@@ -235,69 +235,68 @@ Requirements:
 
                         <div className="grid grid-cols-2 gap-4">
                             <div className="space-y-2">
-                                <Label>Department</Label>
+                                <Label className="text-xs text-foreground font-medium">Department</Label>
                                 <Input
                                     value={department}
                                     onChange={e => setDepartment(e.target.value)}
-                                    className="bg-slate-900 border-slate-700"
+                                    className="bg-background border-border text-foreground h-9"
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>Role</Label>
+                                <Label className="text-xs text-foreground font-medium">Role</Label>
                                 <Select value={role} onValueChange={setRole}>
-                                    <SelectTrigger className="bg-slate-900 border-slate-700">
+                                    <SelectTrigger className="bg-background border-border text-foreground h-9">
                                         <SelectValue />
                                     </SelectTrigger>
-                                    <SelectContent>
+                                    <SelectContent className="bg-card border-border text-foreground">
                                         <SelectItem value="student">Student</SelectItem>
                                         <SelectItem value="teacher">Teacher</SelectItem>
-
                                     </SelectContent>
                                 </Select>
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <Label className="flex justify-between">
+                            <Label className="flex justify-between text-xs text-foreground font-medium">
                                 <span>AI Instructions (Optional)</span>
-                                <span className="text-xs text-slate-400">Max 290 users</span>
+                                <span className="text-[11px] text-muted-foreground font-normal">Max 290 users</span>
                             </Label>
                             <Textarea
                                 placeholder="e.g. Don't add user 610, and make user 615 a teacher."
                                 value={instructions}
                                 onChange={e => setInstructions(e.target.value)}
-                                className="bg-slate-900 border-slate-700 min-h-[80px]"
+                                className="bg-background border-border text-foreground min-h-[80px] text-xs"
                             />
                         </div>
 
                         {/* API Key Section */}
-                        <div className="space-y-3 pt-4 border-t border-slate-700">
-                            <Label className="text-white flex justify-between items-center">
+                        <div className="space-y-3 pt-3 border-t border-border">
+                            <Label className="text-foreground flex justify-between items-center text-xs font-medium">
                                 <span>Gemini API Key</span>
-                                <span className="text-xs text-slate-400 font-normal">(Optional if set in env)</span>
+                                <span className="text-[11px] text-muted-foreground font-normal">(Optional if set in env)</span>
                             </Label>
 
                             <div className="flex gap-2">
                                 <Input
                                     type="password"
-                                    placeholder="Enter Key (Optional if in env)"
+                                    placeholder="Enter Key (Optional)"
                                     value={apiKey}
                                     onChange={(e) => setApiKey(e.target.value)}
-                                    className="bg-slate-900 border-slate-700 h-9 flex-1"
+                                    className="bg-background border-border text-foreground h-9 flex-1 text-xs"
                                 />
                                 <Button
                                     variant="outline"
                                     size="sm"
-                                    className="border-yellow-600 text-yellow-500 hover:bg-yellow-600/10 hover:text-yellow-400"
+                                    className="border-border text-foreground bg-background hover:bg-muted text-xs h-9 font-medium"
                                     onClick={() => window.open('https://aistudio.google.com/app/apikey', '_blank')}
                                 >
-                                    Get Key 🔑
+                                    Get Key
                                 </Button>
                             </div>
                         </div>
 
                         <Button
-                            className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                            className="w-full bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-xs h-9"
                             onClick={handleGenerate}
                             disabled={isGenerating}
                         >
@@ -308,43 +307,60 @@ Requirements:
                 </Card>
 
                 {/* Preview Panel */}
-                <Card className="bg-slate-800 border-slate-700 text-white lg:col-span-2 flex flex-col h-[600px]">
-                    <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle>Data Preview</CardTitle>
+                <Card className="bg-card border-border text-foreground lg:col-span-2 flex flex-col h-[600px] shadow-xs">
+                    <CardHeader className="flex flex-row items-center justify-between pb-3 border-b border-border">
+                        <CardTitle className="text-sm font-semibold text-foreground">Data Preview</CardTitle>
                         <div className="flex gap-2">
-                            <Button variant="outline" size="sm" onClick={copyToClipboard} disabled={!generatedCsv}>
-                                <Copy className="h-4 w-4" />
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-border text-foreground bg-background hover:bg-muted h-8"
+                                onClick={copyToClipboard}
+                                disabled={!generatedCsv}
+                            >
+                                <Copy className="h-3.5 w-3.5" />
                             </Button>
-                            <Button size="sm" className="bg-indigo-600 hover:bg-indigo-700" onClick={downloadJson} disabled={!generatedCsv}>
-                                <FileDown className="h-4 w-4 mr-2" /> .JSON
+                            <Button
+                                variant="outline"
+                                size="sm"
+                                className="border-border text-foreground bg-background hover:bg-muted font-medium h-8"
+                                onClick={downloadJson}
+                                disabled={!generatedCsv}
+                            >
+                                <FileDown className="h-3.5 w-3.5 mr-1.5" /> .JSON
                             </Button>
-                            <Button size="sm" className="bg-green-600 hover:bg-green-700" onClick={downloadCsv} disabled={!generatedCsv}>
-                                <FileDown className="h-4 w-4 mr-2" /> .CSV
+                            <Button
+                                size="sm"
+                                className="bg-foreground text-background hover:bg-foreground/90 font-semibold h-8"
+                                onClick={downloadCsv}
+                                disabled={!generatedCsv}
+                            >
+                                <FileDown className="h-3.5 w-3.5 mr-1.5" /> .CSV
                             </Button>
                         </div>
                     </CardHeader>
                     <CardContent className="flex-1 overflow-auto p-0">
                         {generatedCsv ? (
                             <div className="w-full">
-                                <table className="w-full text-sm text-left text-slate-300">
-                                    <thead className="text-xs text-slate-400 uppercase bg-slate-900/50 sticky top-0">
+                                <table className="w-full text-xs text-left">
+                                    <thead className="text-[11px] text-muted-foreground uppercase bg-muted/40 sticky top-0 border-b border-border">
                                         <tr>
                                             {previewData[0]?.map((header, i) => (
-                                                <th key={i} className="px-6 py-3 border-b border-slate-700">{header}</th>
+                                                <th key={i} className="px-5 py-3 border-b border-border font-medium text-foreground">{header}</th>
                                             ))}
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody className="divide-y divide-border">
                                         {previewData.slice(1).map((row, i) => (
-                                            <tr key={i} className="border-b border-slate-700/50 hover:bg-slate-700/20">
+                                            <tr key={i} className="hover:bg-muted/30 transition-colors">
                                                 {row.map((cell, j) => (
-                                                    <td key={j} className="px-6 py-4 font-mono">{cell}</td>
+                                                    <td key={j} className="px-5 py-3 font-mono text-foreground text-xs">{cell}</td>
                                                 ))}
                                             </tr>
                                         ))}
                                         {generatedCsv.split('\n').length > 6 && (
                                             <tr>
-                                                <td colSpan={5} className="px-6 py-4 text-center text-slate-500 italic">
+                                                <td colSpan={5} className="px-5 py-3 text-center text-muted-foreground italic text-xs">
                                                     ... {generatedCsv.split('\n').length - 6} more rows ...
                                                 </td>
                                             </tr>
@@ -353,9 +369,9 @@ Requirements:
                                 </table>
                             </div>
                         ) : (
-                            <div className="flex flex-col items-center justify-center h-full text-slate-500">
-                                <TableIcon className="h-16 w-16 mb-4 opacity-20" />
-                                <p>Generated data will appear here</p>
+                            <div className="flex flex-col items-center justify-center h-full text-muted-foreground gap-2">
+                                <TableIcon className="h-12 w-12 opacity-30" />
+                                <p className="text-xs">Generated data will appear here</p>
                             </div>
                         )}
                     </CardContent>

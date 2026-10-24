@@ -346,18 +346,37 @@ const Login = () => {
 
       const sessionId = generateSessionId();
 
-      // Update session in Supabase table
+      // Update session and record recent login in database
       try {
         if (userData && userData.id && !userData.full_name?.includes('Recovery Mode')) {
+          const nowIso = new Date().toISOString();
           const updateData: any = {
             activeSessionId: sessionId,
-            activeSessionTimestamp: new Date().toISOString()
+            activeSessionTimestamp: nowIso,
+            last_seen: nowIso
           };
 
           await supabase
             .from('profiles')
             .update(updateData)
             .eq('id', userData.id);
+
+          // Record login in user_logins table if available
+          try {
+            await (supabase as any)
+              .from('user_logins')
+              .insert({
+                user_id: userData.id,
+                email: authUser.email || userData.email,
+                full_name: userData.full_name || userData.name || (authUser.email ? authUser.email.split('@')[0] : 'User'),
+                role: role,
+                department: userData.department || 'General',
+                login_time: nowIso,
+                status: 'Active'
+              });
+          } catch {
+            // Optional table if not yet migrated
+          }
         }
       } catch (e) {
         console.warn("Failed to update session info", e);

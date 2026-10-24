@@ -23,7 +23,7 @@ const MONTH_NAMES_FULL = [
 ];
 
 const nowYear = new Date().getFullYear();
-const YEARS = Array.from({ length: 31 }, (_, i) => 2015 + i); // 2015 to 2045 scrollable range
+const YEARS = Array.from({ length: 31 }, (_, i) => 2015 + i);
 
 export function ModernMonthPicker({
   value,
@@ -81,7 +81,6 @@ export function ModernMonthPicker({
 
   const [viewYear, setViewYear] = useState<number>(currentYear);
 
-  // Keep viewYear synced when value changes externally
   useEffect(() => {
     setViewYear(currentYear);
   }, [currentYear]);
@@ -90,20 +89,6 @@ export function ModernMonthPicker({
     const monthFormatted = String(monthIdx + 1).padStart(2, '0');
     onChange(`${targetYear}-${monthFormatted}`);
     setOpen(false);
-  };
-
-  const handleQuickMonthChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const mIdx = parseInt(e.target.value, 10);
-    handleSelectMonth(mIdx, viewYear);
-  };
-
-  const handleQuickYearChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const newY = parseInt(e.target.value, 10);
-    setViewYear(newY);
-    if (value && currentMonthIndex >= 0) {
-      const monthFormatted = String(currentMonthIndex + 1).padStart(2, '0');
-      onChange(`${newY}-${monthFormatted}`);
-    }
   };
 
   const handleSelectThisMonth = () => {
@@ -123,16 +108,16 @@ export function ModernMonthPicker({
           variant="outline"
           disabled={disabled}
           className={cn(
-            'w-full justify-between text-left font-normal bg-slate-900 border-slate-700 text-slate-200 hover:bg-slate-800 hover:text-white transition-colors h-9',
-            !value && 'text-slate-400',
+            'w-full justify-between text-left font-normal bg-card border-border text-foreground hover:bg-muted transition-colors h-9',
+            !value && 'text-muted-foreground',
             className
           )}
         >
           <div className="flex items-center gap-2 truncate">
-            <CalendarIcon className="h-4 w-4 text-blue-400 shrink-0" />
+            <CalendarIcon className="h-4 w-4 text-foreground shrink-0" />
             <span className="truncate">{formattedLabel}</span>
           </div>
-          <ChevronDown className="h-3.5 w-3.5 text-slate-400 shrink-0 opacity-70" />
+          <ChevronDown className="h-3.5 w-3.5 text-muted-foreground shrink-0 opacity-70" />
         </Button>
       </PopoverTrigger>
       <PopoverContent
@@ -140,22 +125,22 @@ export function ModernMonthPicker({
         sideOffset={10}
         portal={false}
         onPointerDown={(e) => e.stopPropagation()}
-        className="w-[340px] max-w-full p-5 my-1 bg-slate-900/95 border border-slate-700/80 rounded-2xl shadow-2xl z-[9999] text-white backdrop-blur-xl pointer-events-auto select-none"
+        className="w-[340px] max-w-full p-5 my-1 bg-card border border-border rounded-2xl shadow-2xl z-[9999] text-foreground backdrop-blur-xl pointer-events-auto select-none"
       >
         {/* Header with Quick Month & Year Dropdown Selectors and Steppers */}
-        <div className="flex items-center justify-between pb-4 mb-3.5 border-b border-slate-800 gap-2">
+        <div className="flex items-center justify-between pb-4 mb-3.5 border-b border-border gap-2">
           <button
             type="button"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => setViewYear((y) => y - 1)}
             aria-label="Previous year"
-            className="h-8.5 w-8.5 rounded-lg border border-slate-700/80 hover:border-slate-600 bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm active:scale-95 shrink-0"
+            className="h-8.5 w-8.5 rounded-lg border border-border hover:border-foreground/30 bg-muted/60 hover:bg-muted flex items-center justify-center text-foreground transition-all shadow-xs active:scale-95 shrink-0"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
 
           {/* Quick Month and Year Dropdown Controls */}
-          <div className="flex items-center gap-2 bg-slate-800/90 px-3 py-1.5 rounded-xl border border-slate-700/80 shadow-inner relative">
+          <div className="flex items-center gap-2 bg-muted/50 px-3 py-1.5 rounded-xl border border-border shadow-xs relative">
             {/* Month Button + Dropdown */}
             <div className="relative">
               <button
@@ -165,7 +150,7 @@ export function ModernMonthPicker({
                   setShowMonthDropdown((prev) => !prev);
                   setShowYearDropdown(false);
                 }}
-                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-slate-100 hover:text-blue-400 hover:bg-slate-700/50 transition-colors"
+                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-foreground hover:bg-muted transition-colors"
               >
                 <span>{MONTH_NAMES_SHORT[currentMonthIndex]}</span>
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -174,7 +159,7 @@ export function ModernMonthPicker({
               {showMonthDropdown && (
                 <div
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700 shadow-2xl p-1 z-50 custom-scrollbar"
+                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-card border border-border shadow-2xl p-1 z-50 custom-scrollbar"
                 >
                   {MONTH_NAMES_FULL.map((name, idx) => {
                     const isSelected = idx === currentMonthIndex;
@@ -192,10 +177,10 @@ export function ModernMonthPicker({
                         className={cn(
                           'w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors my-0.5',
                           isSelected
-                            ? 'bg-blue-600 text-white font-bold'
+                            ? 'bg-foreground text-background font-bold'
                             : isCurrent
-                            ? 'text-blue-300 bg-blue-500/15 border border-blue-500/30 hover:bg-blue-500/25'
-                            : 'text-slate-200 hover:bg-slate-800 hover:text-white'
+                            ? 'text-foreground bg-muted font-semibold'
+                            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                         )}
                       >
                         <span>{name}</span>
@@ -203,7 +188,7 @@ export function ModernMonthPicker({
                           <span
                             className={cn(
                               'text-[9px] px-1 py-0.5 rounded font-bold uppercase',
-                              isSelected ? 'bg-blue-700 text-white' : 'bg-blue-500/30 text-blue-300'
+                              isSelected ? 'bg-background text-foreground' : 'bg-muted text-foreground'
                             )}
                           >
                             Current
@@ -216,7 +201,7 @@ export function ModernMonthPicker({
               )}
             </div>
 
-            <span className="text-slate-500 text-xs font-bold">/</span>
+            <span className="text-muted-foreground text-xs font-bold">/</span>
 
             {/* Year Button + Dropdown */}
             <div className="relative">
@@ -227,7 +212,7 @@ export function ModernMonthPicker({
                   setShowYearDropdown((prev) => !prev);
                   setShowMonthDropdown(false);
                 }}
-                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-blue-400 hover:text-blue-300 hover:bg-slate-700/50 transition-colors"
+                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-foreground hover:bg-muted transition-colors"
               >
                 <span>{viewYear}</span>
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -236,7 +221,7 @@ export function ModernMonthPicker({
               {showYearDropdown && (
                 <div
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700 shadow-2xl p-1 z-50 custom-scrollbar"
+                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-card border border-border shadow-2xl p-1 z-50 custom-scrollbar"
                 >
                   {YEARS.map((y) => {
                     const isSelected = y === viewYear;
@@ -258,10 +243,10 @@ export function ModernMonthPicker({
                         className={cn(
                           'w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors my-0.5',
                           isSelected
-                            ? 'bg-blue-600 text-white font-bold'
+                            ? 'bg-foreground text-background font-bold'
                             : isCurrent
-                            ? 'text-blue-300 bg-blue-500/15 border border-blue-500/30 hover:bg-blue-500/25'
-                            : 'text-slate-200 hover:bg-slate-800 hover:text-white'
+                            ? 'text-foreground bg-muted font-semibold'
+                            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                         )}
                       >
                         <span>{y}</span>
@@ -269,7 +254,7 @@ export function ModernMonthPicker({
                           <span
                             className={cn(
                               'text-[9px] px-1 py-0.5 rounded font-bold uppercase',
-                              isSelected ? 'bg-blue-700 text-white' : 'bg-blue-500/30 text-blue-300'
+                              isSelected ? 'bg-background text-foreground' : 'bg-muted text-foreground'
                             )}
                           >
                             Current
@@ -288,13 +273,13 @@ export function ModernMonthPicker({
             onPointerDown={(e) => e.stopPropagation()}
             onClick={() => setViewYear((y) => y + 1)}
             aria-label="Next year"
-            className="h-8.5 w-8.5 rounded-lg border border-slate-700/80 hover:border-slate-600 bg-slate-800/80 hover:bg-slate-700 flex items-center justify-center text-slate-300 hover:text-white transition-all shadow-sm active:scale-95 shrink-0"
+            className="h-8.5 w-8.5 rounded-lg border border-border hover:border-foreground/30 bg-muted/60 hover:bg-muted flex items-center justify-center text-foreground transition-all shadow-xs active:scale-95 shrink-0"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>
 
-        {/* 12-Month Interactive Grid */}
+        {/* 12-Month Interactive Grid (High Contrast Monochrome) */}
         <div className="grid grid-cols-3 gap-2.5 py-1.5">
           {MONTH_NAMES_SHORT.map((mName, idx) => {
             const isSelected =
@@ -312,15 +297,15 @@ export function ModernMonthPicker({
                 onPointerDown={(e) => e.stopPropagation()}
                 onClick={() => handleSelectMonth(idx)}
                 className={cn(
-                  'h-11 rounded-xl text-xs font-medium transition-all duration-150 border flex items-center justify-center gap-1.5 active:scale-95 shadow-sm',
+                  'h-11 rounded-xl text-xs font-medium transition-all duration-150 border flex items-center justify-center gap-1.5 active:scale-95 shadow-xs',
                   isSelected
-                    ? 'bg-blue-600 text-white font-bold border-blue-400 shadow-lg shadow-blue-500/30 scale-[1.02]'
+                    ? 'bg-foreground text-background font-bold border-foreground shadow-md scale-[1.02]'
                     : isCurrentMonth
-                    ? 'border-blue-500/50 text-blue-400 bg-blue-500/10 hover:bg-blue-500/20 font-semibold'
-                    : 'border-slate-800/80 bg-slate-800/40 text-slate-300 hover:text-white hover:bg-slate-800 hover:border-slate-700'
+                    ? 'border-foreground/50 text-foreground bg-muted/70 font-semibold'
+                    : 'border-border/70 bg-muted/20 text-muted-foreground hover:text-foreground hover:bg-muted hover:border-border'
                 )}
               >
-                {isSelected && <Check className="h-3.5 w-3.5 stroke-[3]" />}
+                {isSelected && <Check className="h-3.5 w-3.5 stroke-[3] text-background" />}
                 <span>{mName}</span>
               </button>
             );
@@ -328,18 +313,18 @@ export function ModernMonthPicker({
         </div>
 
         {/* Footer Quick Action */}
-        <div className="mt-3.5 pt-3 border-t border-slate-800/80 flex justify-between items-center text-xs px-0.5">
+        <div className="mt-3.5 pt-3 border-t border-border flex justify-between items-center text-xs px-0.5">
           <Button
             type="button"
             variant="ghost"
             size="sm"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={handleSelectThisMonth}
-            className="h-7.5 px-3 text-xs font-semibold text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded-lg active:scale-95"
+            className="h-7.5 px-3 text-xs font-semibold text-foreground hover:bg-muted rounded-lg active:scale-95"
           >
             This month
           </Button>
-          <span className="text-xs text-slate-400 font-medium">
+          <span className="text-xs text-muted-foreground font-medium font-mono">
             {MONTH_NAMES_FULL[currentMonthIndex]} {viewYear}
           </span>
         </div>

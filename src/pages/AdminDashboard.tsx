@@ -1944,10 +1944,10 @@ const AdminDashboard = () => {
             </div>
             <div className="flex flex-col md:flex-row items-center gap-2 w-full md:w-auto">
               <div className="relative w-full md:w-64">
-                <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search users..."
-                  className="pl-8 bg-slate-900 border-slate-700 h-9 text-sm w-full"
+                  className="pl-8 bg-background border-border text-foreground h-9 text-sm w-full"
                   value={userSearchQuery}
                   onChange={(e) => setUserSearchQuery(e.target.value)}
                 />
@@ -1978,7 +1978,7 @@ const AdminDashboard = () => {
                       <TableRow key={user.id}>
                         <TableCell>{user.full_name}</TableCell>
                         <TableCell>{user.email}</TableCell>
-                        <TableCell><span className={`capitalize px-2 py-1 rounded-full text-xs ${user.role === 'teacher' ? 'bg-blue-500/20 text-blue-400' : 'bg-green-500/20 text-green-400'}`}>{user.role}</span></TableCell>
+                        <TableCell><span className="capitalize px-2 py-0.5 rounded-md text-xs font-medium bg-muted text-foreground border border-border">{user.role}</span></TableCell>
                         <TableCell>{user.department}</TableCell>
                         <TableCell>
                           <Button variant="ghost" size="icon" onClick={() => handleDeleteUser(user.id, user.email)}>
@@ -2024,28 +2024,28 @@ const AdminDashboard = () => {
       {activeSection === 'teachers' && (
         <div className="space-y-6">
           <div className="flex flex-col gap-1">
-            <h2 className="text-2xl font-bold text-white">Manage Teachers</h2>
-            <p className="text-slate-400">View and manage registered teachers.</p>
+            <h2 className="text-2xl font-bold text-foreground">Manage Teachers</h2>
+            <p className="text-muted-foreground">View and manage registered teachers from database.</p>
           </div>
 
-          <Card className="bg-slate-800 border-slate-700 text-white">
+          <Card className="bg-card border-border text-foreground">
             <CardContent className="p-6 space-y-4">
               <div className="flex flex-col md:flex-row items-start md:items-center gap-2 mb-4">
                 <div className="relative flex-1 w-full">
-                  <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+                  <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                   <Input
                     placeholder="Search teachers..."
-                    className="pl-8 bg-slate-900 border-slate-700 w-full"
+                    className="pl-8 bg-background border-border text-foreground w-full"
                     value={teachersSearch}
                     onChange={(e) => setTeachersSearch(e.target.value)}
                   />
                 </div>
 
                 <Select value={teachersDepartmentFilter} onValueChange={setTeachersDepartmentFilter}>
-                  <SelectTrigger className="w-[180px] bg-slate-900 border-slate-700">
+                  <SelectTrigger className="w-[180px] bg-background border-border text-foreground">
                     <SelectValue placeholder="Filter Department" />
                   </SelectTrigger>
-                  <SelectContent className="bg-slate-800 border-slate-700 text-slate-200">
+                  <SelectContent className="bg-popover border-border text-popover-foreground">
                     <SelectItem value="all">All Departments</SelectItem>
                     {Array.from(new Set(teachers.map(t => t.department).filter(Boolean))).sort().map(dept => (
                       <SelectItem key={dept} value={dept || 'unknown'}>{dept}</SelectItem>
@@ -2060,26 +2060,26 @@ const AdminDashboard = () => {
               </div>
 
               <div className="flex flex-wrap items-center gap-2 mb-4">
-                <Button variant="outline" onClick={handleSelectAllTeachers} className="border-slate-600 text-slate-300 hover:bg-slate-700 text-xs md:text-sm h-8 md:h-10">
-                  {selectedTeacherIds.length === teachers.length && teachers.length > 0 ? <CheckSquare className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2 text-blue-500" /> : <Square className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />}
+                <Button variant="outline" onClick={handleSelectAllTeachers} className="border-border text-foreground hover:bg-muted text-xs md:text-sm h-8 md:h-10">
+                  {selectedTeacherIds.length === teachers.length && teachers.length > 0 ? <CheckSquare className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2 text-foreground" /> : <Square className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" />}
                   Select All
                 </Button>
 
-                <Button onClick={handleDownloadTeacherDetails} className="bg-green-600 hover:bg-green-700 text-white text-xs md:text-sm h-8 md:h-10">
+                <Button onClick={handleDownloadTeacherDetails} className="bg-foreground text-background hover:bg-foreground/90 font-medium text-xs md:text-sm h-8 md:h-10">
                   <Download className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" /> Details
                 </Button>
 
-                <Button variant="outline" onClick={() => setShowTeacherFieldsDialog(true)} className="border-slate-600 text-slate-300 hover:bg-slate-700 text-xs md:text-sm h-8 md:h-10">
+                <Button variant="outline" onClick={() => setShowTeacherFieldsDialog(true)} className="border-border text-foreground hover:bg-muted text-xs md:text-sm h-8 md:h-10">
                   <Edit className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" /> Fields
                 </Button>
 
-                <Button variant="outline" onClick={handleRaiseAgainAllTeachers} className="border-slate-600 text-slate-300 hover:bg-slate-700 text-xs md:text-sm h-8 md:h-10" title="Raise for selected teachers">
+                <Button variant="outline" onClick={handleRaiseAgainAllTeachers} className="border-border text-foreground hover:bg-muted text-xs md:text-sm h-8 md:h-10" title="Raise for selected teachers">
                   <RotateCcw className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" /> Raise All ({selectedTeacherIds.length})
                 </Button>
 
                 <Button variant="outline" onClick={() => {
                   toast.info("Presence is managed automatically by the system. Manual reset is not required.");
-                }} className="border-slate-600 text-slate-300 hover:bg-slate-700 text-xs md:text-sm h-8 md:h-10" title="Reset online status">
+                }} className="border-border text-foreground hover:bg-muted text-xs md:text-sm h-8 md:h-10" title="Reset online status">
                   <RefreshCw className="h-3 w-3 md:h-4 md:w-4 mr-1 md:mr-2" /> Reset Presence
                 </Button>
               </div>
@@ -2091,7 +2091,7 @@ const AdminDashboard = () => {
                   const matchesDept = teachersDepartmentFilter === 'all' || t.department === teachersDepartmentFilter;
                   return matchesSearch && matchesDept;
                 }).length === 0 ? (
-                  <p className="text-center text-slate-500 py-8">No teachers found.</p>
+                  <p className="text-center text-muted-foreground py-8">No teachers found in database.</p>
                 ) : (
                   teachers.filter(t => {
                     const matchesSearch = (t.full_name || '').toLowerCase().includes(teachersSearch.toLowerCase()) ||
@@ -2101,12 +2101,12 @@ const AdminDashboard = () => {
                   })
                     .slice(0, limitTeachers)
                     .map((teacher, idx) => (
-                      <div key={idx} className={`flex flex-col md:flex-row items-start md:items-center justify-between p-4 rounded-lg border border-slate-700 gap-4 md:gap-0 ${selectedTeacherIds.includes(teacher.id) ? 'bg-blue-900/20 border-blue-500/30' : 'bg-slate-900/50'}`}>
+                      <div key={idx} className={`flex flex-col md:flex-row items-start md:items-center justify-between p-4 rounded-xl border gap-4 md:gap-0 transition-colors ${selectedTeacherIds.includes(teacher.id) ? 'bg-muted/80 border-foreground' : 'bg-card border-border hover:bg-muted/30'}`}>
                         <div className="flex items-center gap-4 w-full">
-                          <button onClick={() => handleSelectTeacher(teacher.id)} className="text-slate-400 hover:text-white shrink-0">
-                            {selectedTeacherIds.includes(teacher.id) ? <CheckSquare className="h-5 w-5 text-blue-500" /> : <Square className="h-5 w-5" />}
+                          <button onClick={() => handleSelectTeacher(teacher.id)} className="text-muted-foreground hover:text-foreground shrink-0">
+                            {selectedTeacherIds.includes(teacher.id) ? <CheckSquare className="h-5 w-5 text-foreground" /> : <Square className="h-5 w-5" />}
                           </button>
-                          <div className="h-10 w-10 rounded-full bg-blue-500/20 flex items-center justify-center text-blue-400 shrink-0 overflow-hidden">
+                          <div className="h-10 w-10 rounded-full bg-muted border border-border flex items-center justify-center text-foreground shrink-0 overflow-hidden">
                             {teacher.profile_picture || teacher.photoURL || teacher.photoUrl ? (
                               <img
                                 src={teacher.profile_picture || teacher.photoURL || teacher.photoUrl}
@@ -2115,9 +2115,7 @@ const AdminDashboard = () => {
                                 referrerPolicy="no-referrer"
                                 onError={(e) => {
                                   (e.target as HTMLImageElement).style.display = 'none';
-                                  (e.target as HTMLImageElement).parentElement!.classList.add('bg-blue-500/20');
-                                  // Fallback to icon? We'd need to conditionally render the icon if img fails or is hidden.
-                                  // Simplest is just hide img and show icon behind it if we structure it right, or just let it be blank/color.
+                                  (e.target as HTMLImageElement).parentElement!.classList.add('bg-muted');
                                 }}
                               />
                             ) : (
@@ -2126,45 +2124,45 @@ const AdminDashboard = () => {
                           </div>
                           <div className="min-w-0 flex-1">
                             <div className="flex items-center gap-2">
-                              <p className="font-medium text-white truncate">{teacher.full_name}</p>
-                              <span className="text-[10px] bg-slate-800 px-2 py-0.5 rounded text-slate-400">{teacher.department || 'No Dept'}</span>
+                              <p className="font-semibold text-foreground truncate">{teacher.full_name}</p>
+                              <span className="text-[10px] bg-muted px-2 py-0.5 rounded text-muted-foreground border border-border">{teacher.department || 'No Dept'}</span>
                               {
                                 presenceData[teacher.id]?.status === 'online' ? (
-                                  <div className="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_4px_2px_rgba(34,197,94,0.4)]" title="Online"></div>
+                                  <div className="w-2 h-2 rounded-full bg-foreground shadow-xs" title="Online"></div>
                                 ) : (
-                                  <div className="w-2 h-2 rounded-full bg-slate-600" title="Offline"></div>
+                                  <div className="w-2 h-2 rounded-full bg-muted-foreground/40" title="Offline"></div>
                                 )
                               }
                               {(presenceData[teacher.id]?.status === 'online' || teacher.last_seen) && (
-                                <span className="text-[10px] text-slate-500 flex items-center gap-1">
+                                <span className="text-[10px] text-muted-foreground flex items-center gap-1 font-mono">
                                   <Clock className="w-3 h-3" />
                                   {presenceData[teacher.id]?.status === 'online' ? 'Active now' : `Last seen: ${formatLastSeen(teacher.last_seen)}`}
                                 </span>
                               )}
                             </div>
-                            <p className="text-xs text-slate-500 truncate">{teacher.email}</p>
+                            <p className="text-xs text-muted-foreground truncate">{teacher.email}</p>
                             <div className="flex gap-2 mt-1">
-                              {teacherDetailsConfig.includes('vta_no') && <span className="text-[10px] text-slate-600">VTA: {teacher.vta_no || 'N/A'}</span>}
-                              {teacherDetailsConfig.includes('mobile') && <span className="text-[10px] text-slate-600">Mob: {teacher.personal_mobile || 'N/A'}</span>}
-                              {teacherDetailsConfig.includes('current_salary') && <span className="text-[10px] text-slate-600">Salary: {teacher.current_salary || 'N/A'}</span>}
+                              {teacherDetailsConfig.includes('vta_no') && <span className="text-[10px] text-muted-foreground font-mono">VTA: {teacher.vta_no || 'N/A'}</span>}
+                              {teacherDetailsConfig.includes('mobile') && <span className="text-[10px] text-muted-foreground font-mono">Mob: {teacher.personal_mobile || 'N/A'}</span>}
+                              {teacherDetailsConfig.includes('current_salary') && <span className="text-[10px] text-muted-foreground font-mono">Salary: {teacher.current_salary || 'N/A'}</span>}
                             </div>
                           </div>
                         </div>
                         <div className="flex gap-2 w-full md:w-auto">
-                          <Button size="sm" variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700" onClick={() => {
+                          <Button size="sm" variant="outline" className="border-border text-foreground hover:bg-muted" onClick={() => {
                             toast.info("Presence managed automatically.");
                           }} title="Reset Presence">
                             <Power className="h-4 w-4" />
                           </Button>
-                          <Button size="sm" variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700" onClick={() => {
+                          <Button size="sm" variant="outline" className="border-border text-foreground hover:bg-muted" onClick={() => {
                             handleRaiseRequestForTeacher(teacher.email);
                           }} title="Raise Request">
                             <RotateCcw className="h-4 w-4" />
                           </Button>
-                          <Button size="sm" variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700" onClick={() => handleResetFaceID(teacher)} title="Reset Face ID">
+                          <Button size="sm" variant="outline" className="border-border text-foreground hover:bg-muted" onClick={() => handleResetFaceID(teacher)} title="Reset Face ID">
                             <ScanFace className="h-4 w-4" />
                           </Button>
-                          <Button size="sm" variant="outline" className="border-slate-600 text-slate-300 hover:bg-slate-700" onClick={() => {
+                          <Button size="sm" variant="outline" className="border-border text-foreground hover:bg-muted" onClick={() => {
                             toast.info("Coming soon");
                           }} title="Download Resume">
                             <Download className="h-4 w-4" />
@@ -2183,33 +2181,31 @@ const AdminDashboard = () => {
 
           {/* Configure Teacher Fields Dialog */}
           <Dialog open={showTeacherFieldsDialog} onOpenChange={setShowTeacherFieldsDialog}>
-            <DialogContent className="bg-slate-900 border-slate-700 text-white">
+            <DialogContent className="bg-card border-border text-foreground">
               <DialogHeader>
                 <DialogTitle>Configure Teacher Details Fields</DialogTitle>
-                <DialogDescription className="text-slate-400">
+                <DialogDescription className="text-muted-foreground">
                   Add or remove fields to include in the teacher details download and view.
                 </DialogDescription>
               </DialogHeader>
               <div className="space-y-4 py-4">
-                <div className="text-xs text-slate-400 flex items-center gap-2">
-                  <span><span className="text-yellow-500 font-semibold">Tip:</span> These fields determine columns in the CSV export.</span>
+                <div className="text-xs text-muted-foreground flex items-center gap-2">
+                  <span><span className="text-foreground font-semibold">Tip:</span> These fields determine columns in the CSV export.</span>
                 </div>
                 <div className="flex gap-2">
                   <Input
                     placeholder="Add custom field (e.g., pan_card)"
                     value={newTeacherDetailField}
                     onChange={(e) => setNewTeacherDetailField(e.target.value)}
-                    className="bg-slate-800 border-slate-700 text-white h-9"
+                    className="bg-background border-border text-foreground h-9"
                     onKeyDown={(e) => e.key === 'Enter' && handleAddTeacherDetailField()}
                   />
-                  <Button onClick={handleAddTeacherDetailField} size="sm" className="bg-emerald-600 hover:bg-emerald-700">Add</Button>
+                  <Button onClick={handleAddTeacherDetailField} size="sm" className="bg-foreground text-background hover:bg-foreground/90 font-medium">Add</Button>
                 </div>
 
                 <div className="space-y-2">
                   <Label>Active & Available Fields</Label>
                   <div className="flex flex-wrap gap-2">
-                    {/* Combine config with available fields to ensure all selected are shown even if not in available */}
-                    {/* Combine config with available fields to ensure all selected are shown even if not in available */}
                     {Array.from(new Set([...availableTeacherFields, ...teacherDetailsConfig])).map(field => {
                       const isDefault = ['name', 'email', 'department', 'vta_no', 'personal_mobile', 'date_of_joining', 'date_of_birth', 'address', 'current_salary'].includes(field);
                       return (
@@ -2228,8 +2224,8 @@ const AdminDashboard = () => {
                           }}
                           className={`flex items-center gap-1 px-3 py-1 rounded-full border select-none transition-colors
                                   ${teacherDetailsConfig.includes(field)
-                              ? 'bg-blue-600 border-blue-500 text-white'
-                              : 'bg-slate-800 border-slate-700 text-slate-400 hover:border-slate-500'}
+                              ? 'bg-foreground text-background border-foreground font-medium'
+                              : 'bg-muted border-border text-muted-foreground hover:border-foreground'}
                                   ${!isDefault ? 'cursor-pointer' : 'cursor-default opacity-80'}`}
                         >
                           <span className="text-sm capitalize">{field.replace(/_/g, ' ')}</span>
@@ -2245,7 +2241,7 @@ const AdminDashboard = () => {
                 </div>
               </div>
               <DialogFooter>
-                <Button variant="outline" onClick={() => setShowTeacherFieldsDialog(false)} className="border-slate-600 hover:bg-slate-800 text-white">Close</Button>
+                <Button variant="outline" onClick={() => setShowTeacherFieldsDialog(false)} className="border-border hover:bg-muted text-foreground">Close</Button>
               </DialogFooter>
             </DialogContent>
           </Dialog>
@@ -2280,7 +2276,7 @@ const AdminDashboard = () => {
                       placeholder="Enter category"
                     />
                   </div>
-                  <Button onClick={handleCreateWorkspace} className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0">
+                  <Button onClick={handleCreateWorkspace} className="w-full bg-foreground text-background hover:bg-foreground/90 font-semibold border-0">
                     <Briefcase className="mr-2 h-4 w-4" /> Create Workspace
                   </Button>
                 </div>
@@ -2288,54 +2284,54 @@ const AdminDashboard = () => {
             </Card>
 
             <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-              <h3 className="text-lg font-medium">My Workspaces ({filteredWorkspaces.length})</h3>
+              <h3 className="text-lg font-medium text-foreground">My Workspaces ({filteredWorkspaces.length})</h3>
               <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                 <Input
                   placeholder="Search workspaces..."
-                  className="w-full md:w-[200px]"
+                  className="w-full md:w-[200px] bg-background border-border text-foreground"
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                 />
                 <div className="flex gap-2">
                   <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-                    <SelectTrigger className="w-full md:w-[150px]"><SelectValue placeholder="All Categories" /></SelectTrigger>
-                    <SelectContent>
+                    <SelectTrigger className="w-full md:w-[150px] bg-background border-border text-foreground"><SelectValue placeholder="All Categories" /></SelectTrigger>
+                    <SelectContent className="bg-popover border-border text-popover-foreground">
                       {categories.map(cat => (
                         <SelectItem key={cat} value={cat}>{cat === 'all' ? 'All Categories' : cat}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button variant="outline" onClick={handleReset} className="flex-1 md:flex-none">Reset</Button>
+                  <Button variant="outline" onClick={handleReset} className="flex-1 md:flex-none border-border hover:bg-muted text-foreground">Reset</Button>
                 </div>
               </div>
             </div>
 
             <div className="space-y-4">
               {filteredWorkspaces.slice((workspacePage - 1) * 2, workspacePage * 2).map((ws) => (
-                <Card key={ws.id} className="overflow-hidden">
-                  <div className="bg-muted/30 p-4 flex items-center justify-between border-b">
+                <Card key={ws.id} className="overflow-hidden border-border bg-card">
+                  <div className="bg-muted/30 p-4 flex items-center justify-between border-b border-border">
                     <div className="flex items-center gap-3">
-                      <h4 className="font-semibold text-lg">{ws.name}</h4>
-                      <span className="text-xs bg-secondary/20 text-secondary-foreground px-2 py-1 rounded">{ws.category}</span>
+                      <h4 className="font-semibold text-lg text-foreground">{ws.name}</h4>
+                      <span className="text-xs bg-muted text-foreground border border-border px-2 py-0.5 rounded">{ws.category}</span>
                     </div>
                     <div className="flex items-center gap-2">
-                      <Button size="sm" className="h-8 bg-emerald-600 hover:bg-emerald-700 text-white border-0" onClick={() => handleOpenCsvUpload(ws.id, ws.name)}><Upload className="h-3 w-3 mr-1" /> CSV</Button>
+                      <Button size="sm" className="h-8 bg-foreground text-background hover:bg-foreground/90 font-medium border-0" onClick={() => handleOpenCsvUpload(ws.id, ws.name)}><Upload className="h-3 w-3 mr-1" /> CSV</Button>
                       <Button variant="destructive" size="sm" className="h-8" onClick={() => handleDeleteWorkspace(ws.id, ws.name)}>Delete</Button>
                     </div>
                   </div>
                   <CardContent className="p-4 space-y-4">
                     {/* Role Appointment Section */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-slate-900/30 rounded-lg border border-slate-800">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 bg-muted/40 rounded-xl border border-border">
                       <div>
                         <Label className="text-xs text-muted-foreground mb-1 block">Class Teacher</Label>
                         <Select
                           value={ws.classTeacher || ''}
                           onValueChange={(val) => handleAppointRole(ws.id, 'classTeacher', val)}
                         >
-                          <SelectTrigger className={`h-8 text-sm ${!ws.classTeacher ? 'border-red-500/50' : 'border-slate-700'}`}>
+                          <SelectTrigger className={`h-8 text-sm bg-background ${!ws.classTeacher ? 'border-red-500/50' : 'border-border'}`}>
                             <SelectValue placeholder="Select Class Teacher" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-popover border-border text-popover-foreground">
                             {ws.teachers.length > 0 ? (
                               ws.teachers.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)
                             ) : (
@@ -2351,10 +2347,10 @@ const AdminDashboard = () => {
                           value={ws.mentor || ''}
                           onValueChange={(val) => handleAppointRole(ws.id, 'mentor', val)}
                         >
-                          <SelectTrigger className={`h-8 text-sm ${!ws.mentor ? 'border-red-500/50' : 'border-slate-700'}`}>
+                          <SelectTrigger className={`h-8 text-sm bg-background ${!ws.mentor ? 'border-red-500/50' : 'border-border'}`}>
                             <SelectValue placeholder="Select Mentor" />
                           </SelectTrigger>
-                          <SelectContent>
+                          <SelectContent className="bg-popover border-border text-popover-foreground">
                             {ws.teachers.length > 0 ? (
                               ws.teachers.map(t => <SelectItem key={t} value={t}>{t}</SelectItem>)
                             ) : (
@@ -2373,20 +2369,20 @@ const AdminDashboard = () => {
                       </div>
                       <div className="space-y-2">
                         {ws.teachers.map(email => (
-                          <div key={email} className="flex items-center justify-between bg-muted/50 p-2 rounded text-sm">
-                            <span>{email}</span>
+                          <div key={email} className="flex items-center justify-between bg-muted/50 p-2 rounded text-sm border border-border">
+                            <span className="text-foreground">{email}</span>
                             <Button variant="destructive" size="sm" className="h-6 text-xs" onClick={() => handleRemoveMember(ws.id, 'teacher', email)}>Remove</Button>
                           </div>
                         ))}
                         <div className="flex gap-2">
                           <Input
                             placeholder="Teacher email"
-                            className="h-8 text-sm"
+                            className="h-8 text-sm bg-background border-border text-foreground"
                             onKeyDown={(e) => {
                               if (e.key === 'Enter') handleAddMember(ws.id, 'teacher', e.currentTarget.value);
                             }}
                           />
-                          <Button size="sm" className="h-8 bg-emerald-600 hover:bg-emerald-700 text-white border-0" onClick={(e) => {
+                          <Button size="sm" className="h-8 bg-foreground text-background hover:bg-foreground/90 font-medium border-0" onClick={(e) => {
                             const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                             handleAddMember(ws.id, 'teacher', input.value);
                             input.value = '';
@@ -2402,8 +2398,8 @@ const AdminDashboard = () => {
                       </div>
                       <div className="space-y-2">
                         {ws.students.slice(((workspaceStudentPages[ws.id] || 1) - 1) * 10, (workspaceStudentPages[ws.id] || 1) * 10).map(email => (
-                          <div key={email} className="flex items-center justify-between bg-muted/50 p-2 rounded text-sm">
-                            <span>{email}</span>
+                          <div key={email} className="flex items-center justify-between bg-muted/50 p-2 rounded text-sm border border-border">
+                            <span className="text-foreground">{email}</span>
                             <Button variant="destructive" size="sm" className="h-6 text-xs" onClick={() => handleRemoveMember(ws.id, 'student', email)}>Remove</Button>
                           </div>
                         ))}
@@ -2416,11 +2412,11 @@ const AdminDashboard = () => {
                               size="sm"
                               onClick={() => setWorkspaceStudentPages(prev => ({ ...prev, [ws.id]: Math.max(1, (prev[ws.id] || 1) - 1) }))}
                               disabled={(workspaceStudentPages[ws.id] || 1) === 1}
-                              className="h-6 w-6 p-0"
+                              className="h-6 w-6 p-0 text-foreground"
                             >
                               <ChevronLeft className="h-3 w-3" />
                             </Button>
-                            <span className="text-xs text-slate-400">
+                            <span className="text-xs text-muted-foreground font-mono">
                               {(workspaceStudentPages[ws.id] || 1)} / {Math.ceil(ws.students.length / 10)}
                             </span>
                             <Button
@@ -2428,7 +2424,7 @@ const AdminDashboard = () => {
                               size="sm"
                               onClick={() => setWorkspaceStudentPages(prev => ({ ...prev, [ws.id]: Math.min(Math.ceil(ws.students.length / 10), (prev[ws.id] || 1) + 1) }))}
                               disabled={(workspaceStudentPages[ws.id] || 1) >= Math.ceil(ws.students.length / 10)}
-                              className="h-6 w-6 p-0"
+                              className="h-6 w-6 p-0 text-foreground"
                             >
                               <ChevronRight className="h-3 w-3" />
                             </Button>
@@ -2438,12 +2434,12 @@ const AdminDashboard = () => {
                         <div className="flex gap-2">
                           <Input
                             placeholder="Student email"
-                            className="h-8 text-sm"
+                            className="h-8 text-sm bg-background border-border text-foreground"
                             onKeyDown={(e) => {
                               if (e.key === 'Enter') handleAddMember(ws.id, 'student', e.currentTarget.value);
                             }}
                           />
-                          <Button size="sm" className="h-8 bg-emerald-600 hover:bg-emerald-700 text-white border-0" onClick={(e) => {
+                          <Button size="sm" className="h-8 bg-foreground text-background hover:bg-foreground/90 font-medium border-0" onClick={(e) => {
                             const input = e.currentTarget.previousElementSibling as HTMLInputElement;
                             handleAddMember(ws.id, 'student', input.value);
                             input.value = '';
@@ -2734,45 +2730,49 @@ const AdminDashboard = () => {
       {
         activeSection === 'send-mail' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white flex items-center gap-2">
-              <Mail className="h-6 w-6 text-purple-400" /> Bulk User Import & Email Sender
-            </h2>
-            <p className="text-slate-400">Upload CSV and send login credentials via Gmail SMTP (Simulator).</p>
+            <div className="flex flex-col gap-1.5">
+              <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                <Mail className="h-6 w-6 text-foreground" /> Bulk User Import & Email Sender
+              </h2>
+              <p className="text-xs text-muted-foreground">Upload CSV and send login credentials via Gmail SMTP (Simulator).</p>
+            </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Configuration Card */}
-              <Card className="bg-slate-800 border-slate-700 text-white h-fit">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-blue-400"><Settings className="h-5 w-5" /> Gmail Configuration</CardTitle>
-                  <CardDescription>
-                    Use an <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-blue-400 underline">App Password</a>, not your login password.
+              <Card className="bg-card border-border text-foreground h-fit shadow-xs">
+                <CardHeader className="pb-3 border-b border-border">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                    <Settings className="h-4 w-4" /> Gmail Configuration
+                  </CardTitle>
+                  <CardDescription className="text-xs text-muted-foreground">
+                    Use an <a href="https://myaccount.google.com/apppasswords" target="_blank" className="text-foreground underline underline-offset-4 font-medium">App Password</a>, not your login password.
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <Label>Gmail Address</Label>
+                    <Label className="text-xs text-foreground font-medium">Gmail Address</Label>
                     <Input
                       placeholder="example@gmail.com"
-                      className="bg-slate-900 border-slate-700"
+                      className="bg-background border-border text-foreground h-9 text-xs"
                       value={mailConfig.gmailUser}
                       onChange={e => setMailConfig({ ...mailConfig, gmailUser: e.target.value })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>App Password (16 chars)</Label>
+                    <Label className="text-xs text-foreground font-medium">App Password (16 chars)</Label>
                     <Input
                       type="password"
                       placeholder="xxxx xxxx xxxx xxxx"
-                      className="bg-slate-900 border-slate-700"
+                      className="bg-background border-border text-foreground h-9 text-xs"
                       value={mailConfig.appPassword}
                       onChange={e => setMailConfig({ ...mailConfig, appPassword: e.target.value })}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label>From Name</Label>
+                    <Label className="text-xs text-foreground font-medium">From Name</Label>
                     <Input
                       placeholder="EduPortal"
-                      className="bg-slate-900 border-slate-700"
+                      className="bg-background border-border text-foreground h-9 text-xs"
                       value={mailConfig.fromName}
                       onChange={e => setMailConfig({ ...mailConfig, fromName: e.target.value })}
                     />
@@ -2781,26 +2781,28 @@ const AdminDashboard = () => {
               </Card>
 
               {/* Upload & Actions Card */}
-              <Card className="bg-slate-800 border-slate-700 text-white h-fit">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2 text-green-400"><Upload className="h-5 w-5" /> CSV Upload</CardTitle>
+              <Card className="bg-card border-border text-foreground h-fit shadow-xs">
+                <CardHeader className="pb-3 border-b border-border">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                    <Upload className="h-4 w-4" /> CSV Upload
+                  </CardTitle>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <Label>Select CSV File</Label>
+                    <Label className="text-xs text-foreground font-medium">Select CSV File</Label>
                     <Input
                       type="file"
                       accept=".csv"
-                      className="bg-slate-900 border-slate-700 file:text-slate-200 file:bg-slate-800"
+                      className="bg-background border-border text-foreground file:text-foreground file:bg-muted/50 file:border-0 file:rounded-md file:text-xs h-9 text-xs"
                       onChange={handleMailCSVUpload}
                     />
                   </div>
-                  <div className="bg-slate-900 p-3 rounded-md text-xs font-mono text-slate-400">
-                    <p className="mb-1 font-bold">Required Columns:</p>
+                  <div className="bg-muted/30 border border-border p-3 rounded-lg text-xs font-mono text-muted-foreground">
+                    <p className="mb-1 font-bold text-foreground">Required Columns:</p>
                     name,email,password,role,department
                   </div>
                   <Button
-                    className="w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white"
+                    className="w-full bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-xs h-9"
                     onClick={handleSendBatchEmails}
                     disabled={isSendingMail || mailRecipients.length === 0}
                   >
@@ -2815,54 +2817,51 @@ const AdminDashboard = () => {
             </div>
 
             {/* Progress & Logs */}
-            <Card className="bg-slate-800 border-slate-700 text-white">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 decoration-amber-400 text-amber-400"><FileSpreadsheet className="h-5 w-5" /> Progress & Logs</CardTitle>
+            <Card className="bg-card border-border text-foreground shadow-xs">
+              <CardHeader className="pb-3 border-b border-border">
+                <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                  <FileSpreadsheet className="h-4 w-4" /> Progress & Logs
+                </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 pt-4">
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4">
-                  <div className="bg-slate-900 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-slate-200">{mailStats.total}</div>
-                    <div className="text-xs text-slate-500">Total Users</div>
+                  <div className="bg-muted/30 border border-border p-3 rounded-xl text-center">
+                    <div className="text-xl font-bold text-foreground font-mono">{mailStats.total}</div>
+                    <div className="text-[11px] text-muted-foreground">Total Users</div>
                   </div>
-                  <div className="bg-slate-900 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-green-500">{mailStats.sent}</div>
-                    <div className="text-xs text-slate-500">Sent</div>
+                  <div className="bg-muted/30 border border-border p-3 rounded-xl text-center">
+                    <div className="text-xl font-bold text-foreground font-mono">{mailStats.sent}</div>
+                    <div className="text-[11px] text-muted-foreground">Sent</div>
                   </div>
-                  <div className="bg-slate-900 p-4 rounded-lg text-center">
-                    <div className="text-2xl font-bold text-red-500">{mailStats.errors}</div>
-                    <div className="text-xs text-slate-500">Errors</div>
+                  <div className="bg-muted/30 border border-border p-3 rounded-xl text-center">
+                    <div className="text-xl font-bold text-foreground font-mono">{mailStats.errors}</div>
+                    <div className="text-[11px] text-muted-foreground">Errors</div>
                   </div>
                 </div>
 
                 {/* Progress Bar */}
                 {isSendingMail && (
                   <div className="space-y-1">
-                    <div className="h-2 w-full bg-slate-900 rounded-full overflow-hidden">
+                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden border border-border">
                       <div
-                        className="h-full bg-blue-500 transition-all duration-300"
+                        className="h-full bg-foreground transition-all duration-300"
                         style={{ width: `${mailProgress}%` }}
                       />
                     </div>
-                    <div className="text-right text-xs text-slate-400">{mailProgress}%</div>
+                    <div className="text-right text-xs text-muted-foreground font-mono">{mailProgress}%</div>
                   </div>
                 )}
 
                 {/* Logs Window */}
                 <div
                   ref={logContainerRef}
-                  className="bg-black/50 border border-slate-700 rounded-md p-4 h-64 overflow-y-auto font-mono text-sm space-y-1"
+                  className="bg-muted/20 border border-border rounded-xl p-4 h-64 overflow-y-auto font-mono text-xs space-y-1"
                 >
-                  {mailLogs.length === 0 && <span className="text-slate-600 italic">Waiting for process to start...</span>}
+                  {mailLogs.length === 0 && <span className="text-muted-foreground italic">Waiting for process to start...</span>}
                   {mailLogs.map((log, i) => (
-                    <div key={i} className={`
-                                ${log.type === 'success' ? 'text-green-400' : ''}
-                                ${log.type === 'error' ? 'text-red-400' : ''}
-                                ${log.type === 'warn' ? 'text-yellow-400' : ''}
-                                ${log.type === 'info' ? 'text-blue-300' : ''}
-                            `}>
-                      <span className="text-slate-600 mr-2">[{new Date().toLocaleTimeString()}]</span>
+                    <div key={i} className="text-foreground">
+                      <span className="text-muted-foreground mr-2">[{new Date().toLocaleTimeString()}]</span>
                       {log.msg}
                     </div>
                   ))}
@@ -2871,25 +2870,25 @@ const AdminDashboard = () => {
             </Card>
 
             {/* How to Get Gmail App Password */}
-            <Card className="bg-slate-800 border-amber-500/50 text-white">
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2 text-amber-400">
-                  <Lock className="h-5 w-5" /> How to Get Your Gmail App Password
+            <Card className="bg-card border-border text-foreground shadow-xs">
+              <CardHeader className="pb-3 border-b border-border">
+                <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                  <Lock className="h-4 w-4" /> How to Get Your Gmail App Password
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-slate-300">
+              <CardContent className="space-y-3 pt-4 text-xs text-muted-foreground">
+                <p>
                   Follow these steps to generate the 16-digit "App password" you must paste into the field above.
                 </p>
-                <ol className="list-decimal pl-5 space-y-2 text-slate-400 text-sm">
+                <ol className="list-decimal pl-5 space-y-1.5 text-xs text-muted-foreground">
                   <li>
                     After 2-Step Verification is ON, open the App Passwords page directly.
                   </li>
                   <li>
-                    Sign in again if asked, choose an app and device (or select <strong>Other (Custom name)</strong> and type "EduPortal SMTP"), then click <strong>Generate</strong>.
+                    Sign in again if asked, choose an app and device (or select <strong className="text-foreground">Other (Custom name)</strong> and type "EduPortal SMTP"), then click <strong className="text-foreground">Generate</strong>.
                   </li>
                   <li>
-                    Google will show a 16-character app password. Copy it (without spaces) and paste it into the <strong>"App Password (16 chars)"</strong> field above.
+                    Google will show a 16-character app password. Copy it (without spaces) and paste it into the <strong className="text-foreground">"App Password (16 chars)"</strong> field above.
                   </li>
                   <li>
                     Keep this app password safe. If you change your main Google password later, you must return to this page and generate a new app password.
@@ -2898,15 +2897,13 @@ const AdminDashboard = () => {
                 <div className="pt-2">
                   <Button
                     variant="outline"
-                    className="bg-slate-900 border-amber-500/50 text-amber-400 hover:bg-amber-500/10 hover:text-amber-300"
+                    size="sm"
+                    className="border-border bg-background text-foreground hover:bg-muted text-xs h-8 font-medium"
                     onClick={() => window.open('https://myaccount.google.com/apppasswords', '_blank')}
                   >
-                    <ExternalLink className="h-4 w-4 mr-2" /> Go to App Passwords Page
+                    <ExternalLink className="h-3.5 w-3.5 mr-1.5" /> Go to App Passwords Page
                   </Button>
                 </div>
-                <p className="text-xs text-slate-500 mt-2">
-                  For more details, see Google's official <a href="https://support.google.com/mail/answer/185833" target="_blank" rel="noreferrer" className="text-blue-400 underline">help article</a>.
-                </p>
               </CardContent>
             </Card>
           </div>
@@ -2917,26 +2914,30 @@ const AdminDashboard = () => {
       {
         activeSection === 'backup' && (
           <div className="space-y-6">
-            <h2 className="text-2xl font-bold text-white">Backup Files</h2>
-            <p className="text-slate-400">Manage database backups and sync with Google Drive.</p>
+            <div className="flex flex-col gap-1.5">
+              <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
+                <Database className="h-6 w-6 text-foreground" /> Backup Files
+              </h2>
+              <p className="text-xs text-muted-foreground">Manage database backups and sync with Google Drive.</p>
+            </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Routine Backup */}
-              <Card className="bg-slate-800 border-slate-700 text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CalendarIcon className="h-5 w-5 text-blue-400" /> Backup Routine
+              <Card className="bg-card border-border text-foreground shadow-xs">
+                <CardHeader className="pb-3 border-b border-border">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                    <CalendarIcon className="h-4 w-4 text-foreground" /> Backup Routine
                   </CardTitle>
-                  <CardDescription>Schedule automated backups for the secondary database.</CardDescription>
+                  <CardDescription className="text-xs text-muted-foreground">Schedule automated backups for the secondary database.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-4">
                   <div className="space-y-2">
-                    <Label>Select Routine</Label>
+                    <Label className="text-xs text-foreground font-medium">Select Routine</Label>
                     <Select value={backupRoutine} onValueChange={setBackupRoutine}>
-                      <SelectTrigger className="bg-slate-900 border-slate-700">
+                      <SelectTrigger className="bg-background border-border text-foreground h-9">
                         <SelectValue placeholder="Select routine" />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-card border-border text-foreground">
                         <SelectItem value="daily">Daily</SelectItem>
                         <SelectItem value="weekly">Weekly</SelectItem>
                         <SelectItem value="monthly">Monthly</SelectItem>
@@ -2945,33 +2946,33 @@ const AdminDashboard = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  <Button onClick={handleSaveRoutine} className="w-full bg-blue-600 hover:bg-blue-700">
+                  <Button onClick={handleSaveRoutine} className="w-full bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-xs h-9">
                     <Save className="h-4 w-4 mr-2" /> Save Routine & Start Backup
                   </Button>
-                  <p className="text-xs text-slate-500 text-center">
+                  <p className="text-[11px] text-muted-foreground text-center">
                     Note: "Start Backup" will save the preference. Automated backups require a backend cron job.
                   </p>
                 </CardContent>
               </Card>
 
               {/* Instant Backup */}
-              <Card className="bg-slate-800 border-slate-700 text-white">
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <CloudUpload className="h-5 w-5 text-green-400" /> Instant Download to Drive
+              <Card className="bg-card border-border text-foreground shadow-xs">
+                <CardHeader className="pb-3 border-b border-border">
+                  <CardTitle className="text-sm font-semibold flex items-center gap-2 text-foreground">
+                    <CloudUpload className="h-4 w-4 text-foreground" /> Instant Download to Drive
                   </CardTitle>
-                  <CardDescription>Immediately backup the secondary database to your Google Drive.</CardDescription>
+                  <CardDescription className="text-xs text-muted-foreground">Immediately backup the secondary database to your Google Drive.</CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-4 pt-4">
                   {!driveAccessToken ? (
-                    <Button variant="outline" onClick={handleGoogleAuth} className="w-full border-slate-600 hover:bg-slate-700">
-                      <img src="https://www.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" alt="Drive" className="w-5 h-5 mr-2" />
+                    <Button variant="outline" onClick={handleGoogleAuth} className="w-full border-border bg-background text-foreground hover:bg-muted font-medium h-9">
+                      <img src="https://www.gstatic.com/images/branding/product/1x/drive_2020q4_32dp.png" alt="Drive" className="w-4 h-4 mr-2" />
                       Sign In with Google
                     </Button>
                   ) : (
-                    <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-lg text-center">
-                      <div className="flex items-center justify-between mb-2">
-                        <p className="text-green-400 text-sm font-medium">Connected to Drive</p>
+                    <div className="p-3 bg-muted/40 border border-border rounded-xl text-center space-y-3">
+                      <div className="flex items-center justify-between">
+                        <p className="text-foreground text-xs font-semibold">Connected to Drive</p>
                         <Button
                           variant="ghost"
                           size="sm"
@@ -2979,7 +2980,7 @@ const AdminDashboard = () => {
                             setDriveAccessToken(null);
                             toast.info("Signed out of Google Drive");
                           }}
-                          className="h-6 text-xs text-red-400 hover:text-red-300 hover:bg-red-500/10"
+                          className="h-6 text-[10px] text-muted-foreground hover:text-foreground"
                         >
                           Sign Out
                         </Button>
@@ -2987,7 +2988,7 @@ const AdminDashboard = () => {
                       <Button
                         onClick={handleBackupToDrive}
                         disabled={isBackingUp}
-                        className="w-full bg-green-600 hover:bg-green-700 text-white"
+                        className="w-full bg-foreground text-background hover:bg-foreground/90 font-semibold shadow-xs h-9"
                       >
                         {isBackingUp ? (
                           <>
@@ -3001,13 +3002,13 @@ const AdminDashboard = () => {
                       </Button>
                     </div>
                   )}
-                  <p className="text-xs text-slate-500">
-                    Target Folder: <a href="https://drive.google.com/drive/folders/1ie0qArIerEv6Adct4s3meChXYImT6RgR?usp=sharing" target="_blank" rel="noreferrer" className="text-blue-400 hover:underline">EduOnline Backups</a>
+                  <p className="text-[11px] text-muted-foreground">
+                    Target Folder: <a href="https://drive.google.com/drive/folders/1ie0qArIerEv6Adct4s3meChXYImT6RgR?usp=sharing" target="_blank" rel="noreferrer" className="text-foreground underline underline-offset-4 font-medium">EduOnline Backups</a>
                   </p>
                 </CardContent>
               </Card>
-            </div >
-          </div >
+            </div>
+          </div>
         )
       }
       <SessionTerminatedDialog

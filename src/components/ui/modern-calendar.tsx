@@ -19,7 +19,7 @@ const MONTH_NAMES = [
 const WEEKDAYS = ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'];
 
 const nowYear = new Date().getFullYear();
-const YEARS = Array.from({ length: 31 }, (_, i) => 2015 + i); // 2015 to 2045 scrollable range
+const YEARS = Array.from({ length: 31 }, (_, i) => 2015 + i);
 
 export function ModernCalendar({
   selected,
@@ -35,21 +35,18 @@ export function ModernCalendar({
   const selectedYearRef = useRef<HTMLButtonElement | null>(null);
   const selectedMonthRef = useRef<HTMLButtonElement | null>(null);
 
-  // Sync current month when selected date changes externally
   useEffect(() => {
     if (selected) {
       setCurrentMonth(selected);
     }
   }, [selected]);
 
-  // Auto-scroll to selected year when dropdown opens
   useEffect(() => {
     if (showYearDropdown && selectedYearRef.current) {
       selectedYearRef.current.scrollIntoView({ block: 'center' });
     }
   }, [showYearDropdown]);
 
-  // Auto-scroll to selected month when dropdown opens
   useEffect(() => {
     if (showMonthDropdown && selectedMonthRef.current) {
       selectedMonthRef.current.scrollIntoView({ block: 'center' });
@@ -73,7 +70,6 @@ export function ModernCalendar({
     if (onSelect) onSelect(now);
   };
 
-  // Calendar matrix calculation
   const calendarDays = useMemo(() => {
     const firstDayIndex = new Date(year, month, 1).getDay();
     const daysInCurrentMonth = new Date(year, month + 1, 0).getDate();
@@ -88,7 +84,6 @@ export function ModernCalendar({
       dateKey: string;
     }> = [];
 
-    // Preceding month days
     for (let i = firstDayIndex - 1; i >= 0; i--) {
       const dayNum = daysInPrevMonth - i;
       const d = new Date(year, month - 1, dayNum);
@@ -103,7 +98,6 @@ export function ModernCalendar({
       });
     }
 
-    // Current month days
     for (let i = 1; i <= daysInCurrentMonth; i++) {
       const d = new Date(year, month, i);
       const key = d.toISOString().split('T')[0];
@@ -117,7 +111,6 @@ export function ModernCalendar({
       });
     }
 
-    // Trailing next month days to fill 35 or 42 cells
     const remainingCells = (7 - (days.length % 7)) % 7;
     for (let i = 1; i <= remainingCells; i++) {
       const d = new Date(year, month + 1, i);
@@ -139,18 +132,20 @@ export function ModernCalendar({
     <div
       onPointerDown={(e) => e.stopPropagation()}
       className={cn(
-        'w-[350px] max-w-full rounded-2xl border border-slate-800 bg-gradient-to-b from-slate-900/95 to-slate-950/95 backdrop-blur-xl p-5 my-1 text-white shadow-2xl transition-all duration-200 select-none pointer-events-auto',
+        'w-[350px] max-w-full rounded-2xl border border-border bg-card p-5 my-1 text-foreground shadow-lg transition-all duration-200 select-none pointer-events-auto',
         className
       )}
     >
-      {/* Header */}
-      <div className="flex items-center justify-between pb-4 border-b border-slate-800/80 gap-2">
+      {/* Header - Pure Black & White */}
+      <div className="flex items-center justify-between pb-4 border-b border-border gap-2">
         <div className="flex items-center gap-2">
-          <div className="p-1.5 rounded-lg bg-blue-500/10 border border-blue-500/20 text-blue-400 shrink-0">
+          {/* Pure Monochrome Icon */}
+          <div className="p-2 rounded-xl bg-foreground text-background shrink-0 shadow-xs">
             <CalendarIcon className="h-4 w-4" />
           </div>
+
           {/* Quick Month & Year Dropdown Selectors */}
-          <div className="flex items-center gap-1.5 bg-slate-800/90 px-2 py-1 rounded-xl border border-slate-700/80 shadow-inner relative">
+          <div className="flex items-center gap-1.5 bg-muted/60 px-2.5 py-1 rounded-xl border border-border shadow-xs relative">
             {/* Month Button + Dropdown */}
             <div className="relative">
               <button
@@ -160,7 +155,7 @@ export function ModernCalendar({
                   setShowMonthDropdown((prev) => !prev);
                   setShowYearDropdown(false);
                 }}
-                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-slate-100 hover:text-blue-400 hover:bg-slate-700/50 transition-colors"
+                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-foreground hover:bg-muted transition-colors"
               >
                 <span>{compact ? MONTH_NAMES[month].slice(0, 3) : MONTH_NAMES[month]}</span>
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -169,7 +164,7 @@ export function ModernCalendar({
               {showMonthDropdown && (
                 <div
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700 shadow-2xl p-1 z-50 custom-scrollbar"
+                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-popover border border-border shadow-2xl p-1 z-50 custom-scrollbar text-popover-foreground"
                 >
                   {MONTH_NAMES.map((name, idx) => {
                     const isSelected = idx === month;
@@ -187,10 +182,10 @@ export function ModernCalendar({
                         className={cn(
                           'w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors my-0.5',
                           isSelected
-                            ? 'bg-blue-600 text-white font-bold'
+                            ? 'bg-foreground text-background font-bold shadow-xs'
                             : isCurrent
-                            ? 'text-blue-300 bg-blue-500/15 border border-blue-500/30 hover:bg-blue-500/25'
-                            : 'text-slate-200 hover:bg-slate-800 hover:text-white'
+                            ? 'text-foreground bg-muted font-semibold'
+                            : 'text-foreground/80 hover:bg-muted hover:text-foreground'
                         )}
                       >
                         <span>{name}</span>
@@ -198,10 +193,10 @@ export function ModernCalendar({
                           <span
                             className={cn(
                               'text-[9px] px-1 py-0.5 rounded font-bold uppercase',
-                              isSelected ? 'bg-blue-700 text-white' : 'bg-blue-500/30 text-blue-300'
+                              isSelected ? 'bg-background text-foreground' : 'bg-muted text-foreground'
                             )}
                           >
-                            Current
+                            Now
                           </span>
                         )}
                       </button>
@@ -211,7 +206,7 @@ export function ModernCalendar({
               )}
             </div>
 
-            <span className="text-slate-500 text-xs font-bold">/</span>
+            <span className="text-muted-foreground text-xs font-bold">/</span>
 
             {/* Year Button + Dropdown */}
             <div className="relative">
@@ -222,7 +217,7 @@ export function ModernCalendar({
                   setShowYearDropdown((prev) => !prev);
                   setShowMonthDropdown(false);
                 }}
-                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-blue-400 hover:text-blue-300 hover:bg-slate-700/50 transition-colors"
+                className="flex items-center gap-1 text-xs font-semibold px-2 py-0.5 rounded-lg text-foreground hover:bg-muted transition-colors"
               >
                 <span>{year}</span>
                 <ChevronDown className="h-3 w-3 opacity-60" />
@@ -231,7 +226,7 @@ export function ModernCalendar({
               {showYearDropdown && (
                 <div
                   onPointerDown={(e) => e.stopPropagation()}
-                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-slate-900 border border-slate-700 shadow-2xl p-1 z-50 custom-scrollbar"
+                  className="absolute top-full left-0 mt-1.5 w-36 max-h-48 overflow-y-auto rounded-xl bg-popover border border-border shadow-2xl p-1 z-50 custom-scrollbar text-popover-foreground"
                 >
                   {YEARS.map((y) => {
                     const isSelected = y === year;
@@ -249,10 +244,10 @@ export function ModernCalendar({
                         className={cn(
                           'w-full text-left px-2.5 py-1.5 rounded-lg text-xs font-medium flex items-center justify-between transition-colors my-0.5',
                           isSelected
-                            ? 'bg-blue-600 text-white font-bold'
+                            ? 'bg-foreground text-background font-bold shadow-xs'
                             : isCurrent
-                            ? 'text-blue-300 bg-blue-500/15 border border-blue-500/30 hover:bg-blue-500/25'
-                            : 'text-slate-200 hover:bg-slate-800 hover:text-white'
+                            ? 'text-foreground bg-muted font-semibold'
+                            : 'text-foreground/80 hover:bg-muted hover:text-foreground'
                         )}
                       >
                         <span>{y}</span>
@@ -260,10 +255,10 @@ export function ModernCalendar({
                           <span
                             className={cn(
                               'text-[9px] px-1 py-0.5 rounded font-bold uppercase',
-                              isSelected ? 'bg-blue-700 text-white' : 'bg-blue-500/30 text-blue-300'
+                              isSelected ? 'bg-background text-foreground' : 'bg-muted text-foreground'
                             )}
                           >
-                            Current
+                            Now
                           </span>
                         )}
                       </button>
@@ -278,11 +273,11 @@ export function ModernCalendar({
         <div className="flex items-center gap-1.5 shrink-0">
           <Button
             type="button"
-            variant="ghost"
+            variant="outline"
             size="sm"
             onPointerDown={(e) => e.stopPropagation()}
             onClick={handleJumpToToday}
-            className="h-8 px-2.5 text-xs font-semibold text-blue-400 hover:text-blue-300 hover:bg-blue-500/10 rounded-lg active:scale-95"
+            className="h-8 px-2.5 text-xs font-semibold text-foreground bg-muted/60 hover:bg-muted border border-border rounded-lg active:scale-95"
             title="Go to Today"
           >
             Today
@@ -292,7 +287,7 @@ export function ModernCalendar({
             onPointerDown={(e) => e.stopPropagation()}
             onClick={handlePrevMonth}
             aria-label="Previous month"
-            className="h-8 w-8 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900/80 hover:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 shadow-sm"
+            className="h-8 w-8 rounded-lg border border-border bg-muted/50 hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-all active:scale-95 shadow-xs"
           >
             <ChevronLeft className="h-4 w-4" />
           </button>
@@ -301,29 +296,26 @@ export function ModernCalendar({
             onPointerDown={(e) => e.stopPropagation()}
             onClick={handleNextMonth}
             aria-label="Next month"
-            className="h-8 w-8 rounded-lg border border-slate-800 hover:border-slate-700 bg-slate-900/80 hover:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-white transition-all active:scale-95 shadow-sm"
+            className="h-8 w-8 rounded-lg border border-border bg-muted/50 hover:bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-all active:scale-95 shadow-xs"
           >
             <ChevronRight className="h-4 w-4" />
           </button>
         </div>
       </div>
 
-      {/* Weekday headers */}
+      {/* Weekday headers - Pure Monochrome */}
       <div className="grid grid-cols-7 gap-1.5 pt-3.5 pb-1.5 text-center">
-        {WEEKDAYS.map((day, idx) => (
+        {WEEKDAYS.map((day) => (
           <div
             key={day}
-            className={cn(
-              'text-[11px] font-semibold tracking-wider uppercase',
-              idx === 0 || idx === 6 ? 'text-blue-400' : 'text-slate-400'
-            )}
+            className="text-[11px] font-semibold tracking-wider uppercase text-muted-foreground"
           >
             {day}
           </div>
         ))}
       </div>
 
-      {/* Days grid */}
+      {/* Days grid - Pure Black & White */}
       <div className="grid grid-cols-7 gap-1.5 pt-1">
         {calendarDays.map((cell) => {
           const dayNum = cell.date.getDate();
@@ -337,12 +329,12 @@ export function ModernCalendar({
                 if (onSelect) onSelect(cell.date);
               }}
               className={cn(
-                'relative flex flex-col items-center justify-center h-9 w-9 mx-auto rounded-xl text-xs transition-all duration-150 active:scale-95',
-                !cell.isCurrentMonth && 'text-slate-600 hover:text-slate-400',
-                cell.isCurrentMonth && 'text-slate-200 hover:bg-slate-800/80 hover:text-white',
-                cell.isToday && !cell.isSelected && 'ring-1 ring-blue-500/70 font-semibold text-blue-300 bg-blue-500/10',
+                'relative flex flex-col items-center justify-center h-9 w-9 mx-auto rounded-xl text-xs transition-all duration-150 active:scale-95 font-medium',
+                !cell.isCurrentMonth && 'text-muted-foreground/35 hover:text-muted-foreground',
+                cell.isCurrentMonth && 'text-foreground hover:bg-muted hover:text-foreground',
+                cell.isToday && !cell.isSelected && 'border border-foreground font-bold text-foreground bg-muted/40',
                 cell.isSelected &&
-                  'bg-gradient-to-br from-blue-600 to-indigo-600 text-white font-bold shadow-lg shadow-blue-500/30 scale-105 z-10'
+                  'bg-foreground text-background font-bold shadow-md scale-105 z-10'
               )}
             >
               <span>{dayNum}</span>
@@ -351,8 +343,8 @@ export function ModernCalendar({
               {cell.hasMark && (
                 <span
                   className={cn(
-                    'absolute bottom-1 h-1 w-1 rounded-full',
-                    cell.isSelected ? 'bg-white' : 'bg-blue-400'
+                    'absolute bottom-1 h-1.5 w-1.5 rounded-full',
+                    cell.isSelected ? 'bg-background' : 'bg-foreground'
                   )}
                 />
               )}
@@ -361,13 +353,13 @@ export function ModernCalendar({
         })}
       </div>
 
-      {/* Selected Date Footer */}
+      {/* Selected Date Footer - Pure Monochrome */}
       {selected && (
-        <div className="mt-3 pt-2.5 border-t border-slate-800/80 flex items-center justify-between text-[11px] text-slate-400">
-          <span className="flex items-center gap-1 text-slate-300">
-            <Sparkles className="h-3 w-3 text-amber-400" /> Selected Date:
+        <div className="mt-3.5 pt-2.5 border-t border-border flex items-center justify-between text-[11px] text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-foreground font-medium">
+            <Sparkles className="h-3.5 w-3.5 text-foreground" /> Selected Date:
           </span>
-          <span className="font-medium text-slate-200">
+          <span className="font-semibold text-foreground font-mono bg-muted/60 px-2 py-0.5 rounded-md border border-border">
             {selected.toLocaleDateString(undefined, {
               weekday: 'short',
               year: 'numeric',

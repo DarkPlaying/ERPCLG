@@ -61,28 +61,28 @@ export const ModernConfirmModal: React.FC<ModernConfirmModalProps> = ({ config, 
 
   const variantStyles = {
     danger: {
-      border: 'border-red-500/40',
-      iconBg: 'bg-red-500/15 border-red-500/30 text-red-400',
-      btn: 'bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white shadow-lg shadow-red-900/30',
-      icon: <Trash2 className="h-6 w-6" />,
+      border: 'border-border',
+      iconBg: 'bg-foreground/10 border-border text-foreground',
+      btn: 'bg-foreground text-background hover:bg-foreground/90 shadow-xs',
+      icon: <Trash2 className="h-5 w-5" />,
     },
     warning: {
-      border: 'border-amber-500/40',
-      iconBg: 'bg-amber-500/15 border-amber-500/30 text-amber-400',
-      btn: 'bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white shadow-lg shadow-amber-900/30',
-      icon: <AlertTriangle className="h-6 w-6" />,
+      border: 'border-border',
+      iconBg: 'bg-foreground/10 border-border text-foreground',
+      btn: 'bg-foreground text-background hover:bg-foreground/90 shadow-xs',
+      icon: <AlertTriangle className="h-5 w-5" />,
     },
     prompt: {
-      border: 'border-blue-500/40',
-      iconBg: 'bg-blue-500/15 border-blue-500/30 text-blue-400',
-      btn: 'bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white shadow-lg shadow-blue-900/30',
-      icon: <MessageSquareQuote className="h-6 w-6" />,
+      border: 'border-border',
+      iconBg: 'bg-foreground/10 border-border text-foreground',
+      btn: 'bg-foreground text-background hover:bg-foreground/90 shadow-xs',
+      icon: <MessageSquareQuote className="h-5 w-5" />,
     },
     info: {
-      border: 'border-slate-700',
-      iconBg: 'bg-slate-800 border-slate-700 text-slate-300',
-      btn: 'bg-blue-600 hover:bg-blue-700 text-white',
-      icon: <HelpCircle className="h-6 w-6" />,
+      border: 'border-border',
+      iconBg: 'bg-foreground/10 border-border text-foreground',
+      btn: 'bg-foreground text-background hover:bg-foreground/90 shadow-xs',
+      icon: <HelpCircle className="h-5 w-5" />,
     },
   }[variant];
 
@@ -94,21 +94,21 @@ export const ModernConfirmModal: React.FC<ModernConfirmModalProps> = ({ config, 
   return (
     <Dialog open={config.open} onOpenChange={(open) => !open && handleCancel()}>
       <DialogContent
-        className={`bg-slate-950/95 ${variantStyles.border} text-white sm:max-w-md backdrop-blur-2xl shadow-2xl [&>button]:hidden select-none animate-in fade-in zoom-in-95 duration-200`}
+        className="bg-card border border-border text-foreground sm:max-w-md shadow-2xl [&>button]:hidden select-none animate-in fade-in zoom-in-95 duration-200 rounded-2xl p-6"
         onInteractOutside={(e) => e.preventDefault()}
         onEscapeKeyDown={(e) => e.preventDefault()}
       >
-        <div className="flex items-start gap-4 pt-1">
-          <div className={`p-3 rounded-2xl border ${variantStyles.iconBg} flex-shrink-0`}>
+        <div className="flex items-start gap-4">
+          <div className={`p-3 rounded-xl border ${variantStyles.iconBg} flex-shrink-0`}>
             {variantStyles.icon}
           </div>
 
           <div className="flex-1 min-w-0">
-            <DialogHeader className="text-left space-y-1.5">
-              <DialogTitle className="text-lg font-bold text-slate-100">
+            <DialogHeader className="text-left space-y-1">
+              <DialogTitle className="text-base font-bold text-foreground tracking-tight">
                 {config.title}
               </DialogTitle>
-              <DialogDescription className="text-slate-300 text-sm leading-relaxed">
+              <DialogDescription className="text-xs text-muted-foreground leading-relaxed">
                 {config.description}
               </DialogDescription>
             </DialogHeader>
@@ -116,8 +116,8 @@ export const ModernConfirmModal: React.FC<ModernConfirmModalProps> = ({ config, 
             {config.requireInput && (
               <div className="mt-4 space-y-2">
                 {config.matchValue && (
-                  <p className="text-xs text-slate-400">
-                    Type <code className="bg-slate-800 px-1.5 py-0.5 rounded text-red-400 font-mono font-bold">{config.matchValue}</code> to confirm:
+                  <p className="text-xs text-muted-foreground">
+                    Type <code className="bg-muted px-1.5 py-0.5 rounded border border-border text-foreground font-mono font-bold">{config.matchValue}</code> to confirm:
                   </p>
                 )}
                 <Input
@@ -131,20 +131,20 @@ export const ModernConfirmModal: React.FC<ModernConfirmModalProps> = ({ config, 
                       handleConfirm();
                     }
                   }}
-                  className="bg-slate-900 border-slate-700 text-white placeholder:text-slate-500 focus:border-blue-500 h-10"
+                  className="bg-background border-border text-foreground placeholder:text-muted-foreground h-9 text-xs"
                 />
               </div>
             )}
           </div>
         </div>
 
-        <DialogFooter className="mt-6 flex flex-row justify-end gap-2.5">
+        <DialogFooter className="mt-5 flex flex-row justify-end gap-2.5">
           <Button
             type="button"
             variant="outline"
             onClick={handleCancel}
             disabled={isSubmitting}
-            className="border-slate-700 bg-slate-900/60 hover:bg-slate-800 text-slate-300 hover:text-white"
+            className="border-border bg-background hover:bg-muted text-foreground text-xs h-9 font-medium"
           >
             {config.cancelText || 'Cancel'}
           </Button>
@@ -153,7 +153,7 @@ export const ModernConfirmModal: React.FC<ModernConfirmModalProps> = ({ config, 
             type="button"
             onClick={handleConfirm}
             disabled={isConfirmDisabled}
-            className={`${variantStyles.btn} transition-all font-medium`}
+            className={`${variantStyles.btn} text-xs h-9 font-semibold`}
           >
             {isSubmitting ? 'Processing...' : config.confirmText || 'Confirm'}
           </Button>

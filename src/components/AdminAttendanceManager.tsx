@@ -527,27 +527,27 @@ export const AdminAttendanceManager = () => {
     return (
         <div className="space-y-6 w-full">
             <div className="flex flex-col gap-2">
-                <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-                    <ClipboardList className="h-8 w-8 text-indigo-500" />
+                <h1 className="text-3xl font-bold text-foreground flex items-center gap-2">
+                    <ClipboardList className="h-8 w-8 text-foreground" />
                     Manage Teacher Attendance
                 </h1>
-                <p className="text-slate-400">View and modify daily attendance reports for teachers.</p>
+                <p className="text-muted-foreground">View and modify daily attendance reports for teachers from database.</p>
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
                 {/* Controls Panel */}
-                <Card className="bg-slate-800 border-slate-700 text-white lg:col-span-1 h-fit">
+                <Card className="bg-card border-border text-foreground lg:col-span-1 h-fit">
                     <CardHeader>
-                        <CardTitle>Controls</CardTitle>
+                        <CardTitle className="text-foreground">Controls</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
-                            <Label>Date</Label>
+                            <Label className="text-foreground">Date</Label>
                             <Popover>
                                 <PopoverTrigger asChild>
                                     <Button
                                         variant="outline"
-                                        className="w-full justify-start text-left font-normal bg-slate-900 border-slate-700 hover:bg-slate-800"
+                                        className="w-full justify-start text-left font-normal bg-background border-border text-foreground hover:bg-muted"
                                     >
                                         <CalendarIcon className="mr-2 h-4 w-4" />
                                         {date ? format(date, 'PPP') : <span>Pick a date</span>}
@@ -564,12 +564,12 @@ export const AdminAttendanceManager = () => {
                         </div>
 
                         <div className="space-y-2">
-                            <Label>Department</Label>
+                            <Label className="text-foreground">Department</Label>
                             <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
-                                <SelectTrigger className="bg-slate-900 border-slate-700">
+                                <SelectTrigger className="bg-background border-border text-foreground">
                                     <SelectValue placeholder="All Departments" />
                                 </SelectTrigger>
-                                <SelectContent>
+                                <SelectContent className="bg-popover border-border text-popover-foreground">
                                     <SelectItem value="all">All Departments</SelectItem>
                                     {departments.map(d => (
                                         <SelectItem key={d} value={d}>{d}</SelectItem>
@@ -579,42 +579,42 @@ export const AdminAttendanceManager = () => {
                         </div>
 
                         <div className="space-y-2">
-                            <Label className="text-[10px] uppercase font-bold tracking-widest text-slate-500">Attendance Summary</Label>
+                            <Label className="text-[10px] uppercase font-bold tracking-widest text-muted-foreground">Attendance Summary</Label>
                             <div className="grid grid-cols-3 gap-2">
-                                <div className="bg-emerald-500/10 p-3 rounded-xl text-center border border-emerald-500/20 shadow-sm">
-                                    <div className="font-black text-xl text-emerald-500 leading-none">{stats.present}</div>
-                                    <div className="text-[9px] font-bold text-emerald-400/70 mt-1 uppercase">Present</div>
+                                <div className="bg-muted p-3 rounded-xl text-center border border-border shadow-xs">
+                                    <div className="font-black text-xl text-foreground leading-none">{stats.present}</div>
+                                    <div className="text-[9px] font-bold text-muted-foreground mt-1 uppercase">Present</div>
                                 </div>
-                                <div className="bg-rose-500/10 p-3 rounded-xl text-center border border-rose-500/20 shadow-sm">
-                                    <div className="font-black text-xl text-rose-500 leading-none">{stats.absent}</div>
-                                    <div className="text-[9px] font-bold text-rose-400/70 mt-1 uppercase">Absent</div>
+                                <div className="bg-muted p-3 rounded-xl text-center border border-border shadow-xs">
+                                    <div className="font-black text-xl text-foreground leading-none">{stats.absent}</div>
+                                    <div className="text-[9px] font-bold text-muted-foreground mt-1 uppercase">Absent</div>
                                 </div>
-                                <div className="bg-amber-500/10 p-3 rounded-xl text-center border border-amber-500/20 shadow-sm">
-                                    <div className="font-black text-xl text-amber-500 leading-none">{stats.halfDay}</div>
-                                    <div className="text-[9px] font-bold text-amber-400/70 mt-1 uppercase">Half Day</div>
+                                <div className="bg-muted p-3 rounded-xl text-center border border-border shadow-xs">
+                                    <div className="font-black text-xl text-foreground leading-none">{stats.halfDay}</div>
+                                    <div className="text-[9px] font-bold text-muted-foreground mt-1 uppercase">Half Day</div>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="pt-4 space-y-3 border-t border-slate-700">
-                            <Button className="w-full bg-blue-600 hover:bg-blue-700" onClick={saveAttendance} disabled={saving}>
+                        <div className="pt-4 space-y-3 border-t border-border">
+                            <Button className="w-full bg-foreground text-background hover:bg-foreground/90 font-medium border-0" onClick={saveAttendance} disabled={saving}>
                                 {saving ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Save className="mr-2 h-4 w-4" />}
                                 Save Changes
                             </Button>
 
-                            <Button variant="outline" className="w-full border-slate-700" onClick={downloadExcel}>
+                            <Button variant="outline" className="w-full border-border hover:bg-muted text-foreground" onClick={downloadExcel}>
                                 <Download className="mr-2 h-4 w-4" />
                                 Download Report
                             </Button>
 
-                            <Button variant="secondary" className="w-full bg-indigo-600 hover:bg-indigo-700 text-white" onClick={() => setOverallAttendanceOpen(true)}>
+                            <Button variant="outline" className="w-full border-border hover:bg-muted text-foreground font-medium" onClick={() => setOverallAttendanceOpen(true)}>
                                 <Eye className="mr-2 h-4 w-4" />
                                 View Overall Attendance
                             </Button>
 
                             <Button
-                                variant="destructive"
-                                className="w-full bg-red-900/50 hover:bg-red-900 border border-red-800 text-red-200"
+                                variant="outline"
+                                className="w-full border-border hover:bg-destructive hover:text-destructive-foreground text-foreground"
                                 onClick={resetAllFaceIDs}
                                 disabled={saving}
                             >
@@ -624,7 +624,7 @@ export const AdminAttendanceManager = () => {
 
                             <Button
                                 variant="outline"
-                                className="w-full border-slate-700 bg-amber-600/10 hover:bg-amber-600 text-amber-500 hover:text-white border-amber-600/50"
+                                className="w-full border-border hover:bg-muted text-foreground"
                                 onClick={() => setShowLocationSettings(true)}
                             >
                                 <MapPin className="mr-2 h-4 w-4" />
@@ -635,84 +635,84 @@ export const AdminAttendanceManager = () => {
                 </Card>
 
                 {/* Main List */}
-                <Card className="bg-slate-800 border-slate-700 text-white lg:col-span-3">
+                <Card className="bg-card border-border text-foreground lg:col-span-3">
                     <CardHeader className="flex flex-row items-center justify-between">
-                        <CardTitle>Attendance List</CardTitle>
+                        <CardTitle className="text-foreground">Attendance List</CardTitle>
                         <div className="relative w-64">
-                            <Search className="absolute left-2 top-2.5 h-4 w-4 text-slate-400" />
+                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                             <Input
                                 placeholder="Search teacher..."
-                                className="pl-8 bg-slate-900 border-slate-700 h-9"
+                                className="pl-8 bg-background border-border text-foreground h-9"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
                         </div>
                     </CardHeader>
                     <CardContent>
-                        <div className="rounded-md border border-slate-700 overflow-hidden">
+                        <div className="rounded-xl border border-border overflow-hidden">
                             <Table>
-                                <TableHeader className="bg-slate-900 border-b border-slate-700">
-                                    <TableRow className="border-slate-700 hover:bg-slate-900">
-                                        <TableHead className="text-slate-400">Teacher</TableHead>
-                                        <TableHead className="text-slate-400">Department</TableHead>
-                                        <TableHead className="text-center text-slate-400">Status</TableHead>
-                                        <TableHead className="text-center text-slate-400">Actions</TableHead>
+                                <TableHeader className="bg-muted/40 border-b border-border">
+                                    <TableRow className="border-border hover:bg-muted/50">
+                                        <TableHead className="text-muted-foreground font-semibold">Teacher</TableHead>
+                                        <TableHead className="text-muted-foreground font-semibold">Department</TableHead>
+                                        <TableHead className="text-center text-muted-foreground font-semibold">Status</TableHead>
+                                        <TableHead className="text-center text-muted-foreground font-semibold">Actions</TableHead>
                                     </TableRow>
                                 </TableHeader>
                                 <TableBody>
                                     {loading ? (
                                         <TableRow>
                                             <TableCell colSpan={4} className="h-24 text-center">
-                                                <Loader2 className="h-6 w-6 animate-spin mx-auto text-slate-500" />
+                                                <Loader2 className="h-6 w-6 animate-spin mx-auto text-muted-foreground" />
                                             </TableCell>
                                         </TableRow>
                                     ) : filteredTeachers.length === 0 ? (
                                         <TableRow>
-                                            <TableCell colSpan={4} className="h-24 text-center text-slate-500">
-                                                No teachers found
+                                            <TableCell colSpan={4} className="h-24 text-center text-muted-foreground">
+                                                No teachers found in database
                                             </TableCell>
                                         </TableRow>
                                     ) : (
                                         paginatedTeachers.map((teacher) => {
                                             const status = attendance[teacher.id]?.status; // undefined = Not Marked
                                             return (
-                                                <TableRow key={teacher.id} className="border-slate-700 hover:bg-slate-700/30">
-                                                    <TableCell className="font-medium">
+                                                <TableRow key={teacher.id} className="border-border hover:bg-muted/30">
+                                                    <TableCell className="font-medium text-foreground">
                                                         <div>{teacher.name}</div>
-                                                        <div className="text-xs text-slate-500">{teacher.email}</div>
+                                                        <div className="text-xs text-muted-foreground">{teacher.email}</div>
                                                     </TableCell>
-                                                    <TableCell>{teacher.department}</TableCell>
+                                                    <TableCell className="text-muted-foreground">{teacher.department}</TableCell>
                                                     <TableCell>
                                                         <div className="flex justify-center gap-3">
                                                             <button
                                                                 onClick={() => handleStatusChange(teacher.id, 'P')}
-                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-sm
+                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-xs
                                                             ${status === 'P'
-                                                                        ? 'bg-emerald-500 text-emerald-950 font-black ring-2 ring-emerald-400 ring-offset-2 ring-offset-slate-900 scale-110 shadow-emerald-500/20'
-                                                                        : 'bg-slate-800 text-slate-500 hover:bg-slate-700 hover:text-slate-300'}`}
+                                                                        ? 'bg-foreground text-background font-bold ring-2 ring-foreground scale-105'
+                                                                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'}`}
                                                                 title="Present"
                                                             >
-                                                                <span className="text-xs leading-none">P</span>
+                                                                <span className="text-xs font-bold leading-none">P</span>
                                                             </button>
                                                             <button
                                                                 onClick={() => handleStatusChange(teacher.id, 'A')}
-                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-sm
+                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-xs
                                                             ${status === 'A'
-                                                                        ? 'bg-rose-500 text-rose-950 font-black ring-2 ring-rose-400 ring-offset-2 ring-offset-slate-900 scale-110 shadow-rose-500/20'
-                                                                        : 'bg-slate-800 text-slate-500 hover:bg-slate-700 hover:text-slate-300'}`}
+                                                                        ? 'bg-zinc-800 text-white dark:bg-zinc-200 dark:text-black font-bold ring-2 ring-border scale-105'
+                                                                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'}`}
                                                                 title="Absent"
                                                             >
-                                                                <span className="text-xs leading-none">A</span>
+                                                                <span className="text-xs font-bold leading-none">A</span>
                                                             </button>
                                                             <button
                                                                 onClick={() => handleStatusChange(teacher.id, 'HL')}
-                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-sm
+                                                                className={`w-10 h-10 rounded-xl flex flex-col items-center justify-center transition-all duration-300 shadow-xs
                                                             ${status === 'HL'
-                                                                        ? 'bg-amber-500 text-amber-950 font-black ring-2 ring-amber-400 ring-offset-2 ring-offset-slate-900 scale-110 shadow-amber-500/20'
-                                                                        : 'bg-slate-800 text-slate-500 hover:bg-slate-700 hover:text-slate-300'}`}
+                                                                        ? 'bg-zinc-500 text-white font-bold ring-2 ring-border scale-105'
+                                                                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'}`}
                                                                 title="Half Day Leave"
                                                             >
-                                                                <span className="text-xs leading-none text-[10px]">HL</span>
+                                                                <span className="text-xs font-bold leading-none text-[10px]">HL</span>
                                                             </button>
                                                         </div>
                                                     </TableCell>
@@ -721,7 +721,7 @@ export const AdminAttendanceManager = () => {
                                                             <Button
                                                                 variant="ghost"
                                                                 size="sm"
-                                                                className="text-slate-400 hover:text-indigo-400 hover:bg-indigo-400/10"
+                                                                className="text-muted-foreground hover:text-foreground hover:bg-muted"
                                                                 onClick={() => {
                                                                     setSelectedTeacherForHistory(teacher);
                                                                     setHistoryDialogOpen(true);
@@ -733,7 +733,7 @@ export const AdminAttendanceManager = () => {
                                                             <Button
                                                                 variant="ghost"
                                                                 size="sm"
-                                                                className="text-slate-400 hover:text-red-400 hover:bg-red-400/10"
+                                                                className="text-muted-foreground hover:text-foreground hover:bg-muted"
                                                                 onClick={() => resetFaceID(teacher.id, teacher.name)}
                                                                 title="Reset Face ID"
                                                             >

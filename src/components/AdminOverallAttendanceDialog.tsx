@@ -140,18 +140,18 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
 
     const getStatusColor = (status: string | undefined) => {
         switch (status) {
-            case 'P': return 'bg-emerald-500 text-emerald-950';
-            case 'A': return 'bg-rose-500 text-rose-950';
-            case 'HL': return 'bg-amber-500 text-amber-950';
-            default: return 'bg-slate-800/30 text-slate-600';
+            case 'P': return 'bg-foreground text-background font-bold shadow-xs';
+            case 'A': return 'border border-border bg-muted/60 text-foreground font-bold';
+            case 'HL': return 'border border-dashed border-border bg-foreground/15 text-foreground font-bold';
+            default: return 'text-muted-foreground/30 font-normal';
         }
     };
 
     return (
         <Dialog open={open} onOpenChange={onOpenChange}>
-            <DialogContent className="max-w-[95vw] w-full h-[90vh] bg-slate-900 border-slate-700 text-white flex flex-col p-0">
+            <DialogContent className="max-w-[95vw] w-full h-[90vh] bg-card border-border text-foreground flex flex-col p-0">
                 <DialogHeader className="p-6 pb-2">
-                    <DialogTitle className="text-2xl font-bold flex items-center gap-2">
+                    <DialogTitle className="text-2xl font-bold flex items-center gap-2 text-foreground">
                         Overall Teacher Attendance
                     </DialogTitle>
                     <DialogDescription className="sr-only">
@@ -159,14 +159,14 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="px-6 py-4 border-b border-slate-700 flex flex-wrap items-center gap-4">
+                <div className="px-6 py-4 border-b border-border flex flex-wrap items-center gap-4">
                     <div className="flex flex-col gap-1.5 min-w-[150px]">
-                        <Label className="text-xs text-slate-400">Department</Label>
+                        <Label className="text-xs text-muted-foreground">Department</Label>
                         <Select value={selectedDept} onValueChange={setSelectedDept}>
-                            <SelectTrigger className="bg-slate-800 border-slate-700 h-9">
+                            <SelectTrigger className="bg-background border-border text-foreground h-9">
                                 <SelectValue placeholder="All Departments" />
                             </SelectTrigger>
-                            <SelectContent className="bg-slate-800 border-slate-700 text-white">
+                            <SelectContent className="bg-card border-border text-foreground">
                                 <SelectItem value="all">All Departments</SelectItem>
                                 {departments.map(d => (
                                     <SelectItem key={d} value={d}>{d}</SelectItem>
@@ -176,21 +176,21 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
                     </div>
 
                     <div className="flex flex-col gap-1.5 min-w-[180px]">
-                        <Label className="text-xs text-slate-400">Select Month</Label>
+                        <Label className="text-xs text-muted-foreground">Select Month</Label>
                         <ModernMonthPicker
                             value={selectedMonth}
                             onChange={(val) => setSelectedMonth(val)}
-                            className="bg-slate-800 border-slate-700 h-9"
+                            className="bg-background border-border text-foreground h-9"
                         />
                     </div>
 
                     <div className="flex flex-col gap-1.5 flex-1 min-w-[200px]">
-                        <Label className="text-xs text-slate-400">Search Teacher</Label>
+                        <Label className="text-xs text-muted-foreground">Search Teacher</Label>
                         <div className="relative">
-                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-slate-500" />
+                            <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                             <Input
                                 placeholder="Name or email..."
-                                className="pl-9 bg-slate-800 border-slate-700 h-9"
+                                className="pl-9 bg-background border-border text-foreground h-9"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                             />
@@ -201,43 +201,43 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
                 <div className="flex-1 overflow-hidden p-6">
                     {loading ? (
                         <div className="h-full flex flex-col items-center justify-center gap-2">
-                            <Loader2 className="h-8 w-8 animate-spin text-indigo-500" />
-                            <p className="text-slate-400">Loading attendance data...</p>
+                            <Loader2 className="h-8 w-8 animate-spin text-foreground" />
+                            <p className="text-muted-foreground text-xs">Loading attendance data...</p>
                         </div>
                     ) : filteredTeachers.length === 0 ? (
-                        <div className="h-full flex flex-col items-center justify-center text-slate-500">
+                        <div className="h-full flex flex-col items-center justify-center text-muted-foreground text-xs">
                             <p>No teachers found for the selected department.</p>
                         </div>
                     ) : (
-                        <div className="border border-slate-700 rounded-lg overflow-hidden h-full flex flex-col">
+                        <div className="border border-border rounded-xl overflow-hidden h-full flex flex-col">
                             <div className="overflow-x-auto overflow-y-auto flex-1 custom-scrollbar">
                                 <table className="min-w-full table-auto border-collapse text-xs whitespace-nowrap" onMouseLeave={() => { setHoveredRow(null); setHoveredCol(null); }}>
                                     <thead className="sticky top-0 z-30">
-                                        <tr className="bg-slate-950 border-b border-slate-700">
-                                            <th className="p-0 font-medium text-slate-400 text-left sticky left-0 top-0 bg-slate-950 z-40 border-r border-slate-700">
-                                                <div className="p-2 w-[160px] md:w-[200px] text-sm font-bold">Teacher</div>
+                                        <tr className="bg-muted/40 border-b border-border">
+                                            <th className="p-0 font-medium text-foreground text-left sticky left-0 top-0 bg-card z-40 border-r border-border">
+                                                <div className="p-2 w-[160px] md:w-[200px] text-xs font-bold uppercase tracking-wider">Teacher</div>
                                             </th>
                                             {Array.from({ length: 31 }, (_, i) => i + 1).map(day => {
                                                 const isRealDay = day <= daysInMonth();
                                                 return (
-                                                    <th key={day} className={`p-0 font-medium text-slate-400 text-center border-r border-slate-800/50 last:border-0 ${hoveredCol === day ? 'bg-indigo-500/10' : ''} ${!isRealDay ? 'bg-slate-900/50' : ''}`}>
+                                                    <th key={day} className={`p-0 font-medium text-muted-foreground text-center border-r border-border/50 last:border-0 ${hoveredCol === day ? 'bg-muted/50' : ''} ${!isRealDay ? 'bg-muted/20' : ''}`}>
                                                         <div className="py-2 w-7 md:w-8 flex items-center justify-center text-[10px] font-bold">{day}</div>
                                                     </th>
                                                 );
                                             })}
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-slate-800">
+                                    <tbody className="divide-y divide-border">
                                         {paginatedTeachers.map((teacher, idx) => {
                                             const totalDays = daysInMonth();
                                             const [year, month] = selectedMonth.split('-');
 
                                             return (
-                                                <tr key={teacher.id} className="hover:bg-slate-800/50 transition-colors">
-                                                    <td className={`p-0 font-medium text-slate-300 sticky left-0 bg-slate-900 z-20 border-r border-slate-700 shadow-[2px_0_5px_rgba(0,0,0,0.5)] ${hoveredRow === idx ? 'bg-indigo-500/10' : ''}`}>
+                                                <tr key={teacher.id} className="hover:bg-muted/30 transition-colors">
+                                                    <td className={`p-0 font-medium sticky left-0 bg-card z-20 border-r border-border shadow-xs ${hoveredRow === idx ? 'bg-muted/40' : ''}`}>
                                                         <div className="p-2 w-[160px] md:w-[200px] flex flex-col">
-                                                            <span className="truncate text-sm font-bold" title={teacher.name}>{teacher.name}</span>
-                                                            <span className="truncate text-[10px] text-slate-500" title={teacher.email}>{teacher.email}</span>
+                                                            <span className="truncate text-xs font-semibold text-foreground" title={teacher.name}>{teacher.name}</span>
+                                                            <span className="truncate text-[10px] text-muted-foreground" title={teacher.email}>{teacher.email}</span>
                                                         </div>
                                                     </td>
                                                     {Array.from({ length: 31 }, (_, i) => i + 1).map(day => {
@@ -248,13 +248,13 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
                                                         return (
                                                             <td
                                                                 key={day}
-                                                                className={`p-0 text-center border-r border-slate-800/50 last:border-0 transition-colors ${hoveredRow === idx || hoveredCol === day ? 'bg-indigo-500/10' : ''} ${!isRealDay ? 'bg-slate-900/30' : ''}`}
+                                                                className={`p-0 text-center border-r border-border/40 last:border-0 transition-colors ${hoveredRow === idx || hoveredCol === day ? 'bg-muted/40' : ''} ${!isRealDay ? 'bg-muted/10' : ''}`}
                                                                 onMouseEnter={() => { setHoveredRow(idx); setHoveredCol(day); }}
                                                             >
                                                                 <div className="py-1 w-7 md:w-8 flex items-center justify-center">
                                                                     {isRealDay ? (
                                                                         <div
-                                                                            className={`w-5 h-5 md:w-6 md:h-6 rounded-sm flex items-center justify-center text-[9px] font-black shadow-sm transition-all ${getStatusColor(status)}`}
+                                                                            className={`w-5 h-5 md:w-6 md:h-6 rounded-md flex items-center justify-center text-[10px] font-black transition-all ${getStatusColor(status)}`}
                                                                             title={`${dateStr}: ${status || 'No Record'}`}
                                                                         >
                                                                             {status || '-'}
@@ -276,31 +276,35 @@ export const AdminOverallAttendanceDialog = ({ open, onOpenChange, departments }
                     )}
                 </div>
 
-                <div className="p-4 border-t border-slate-700 bg-slate-800/50 flex flex-col md:flex-row items-center justify-between gap-4">
+                <div className="p-4 border-t border-border bg-muted/20 flex flex-col md:flex-row items-center justify-between gap-4">
                     <div className="flex items-center gap-2">
                         <Button
                             variant="outline"
                             size="sm"
-                            className="bg-slate-900 border-slate-700 text-slate-300 hover:bg-slate-700"
+                            className="bg-background border-border text-foreground hover:bg-muted"
                             onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
                             disabled={currentPage === 1}
                         >
                             <ChevronLeft className="h-4 w-4 mr-1" /> Previous
                         </Button>
-                        <div className="flex items-center gap-1.5 px-4 text-sm font-medium text-slate-400">
-                            Page <span className="text-white">{currentPage}</span> of <span className="text-white">{totalPages || 1}</span>
+                        <div className="flex items-center gap-1.5 px-4 text-xs font-medium text-muted-foreground">
+                            Page <span className="text-foreground font-semibold">{currentPage}</span> of <span className="text-foreground font-semibold">{totalPages || 1}</span>
                         </div>
                         <Button
                             variant="outline"
                             size="sm"
-                            className="bg-slate-900 border-slate-700 text-slate-300 hover:bg-slate-700"
+                            className="bg-background border-border text-foreground hover:bg-muted"
                             onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
                             disabled={currentPage === totalPages || totalPages === 0}
                         >
                             Next <ChevronRight className="h-4 w-4 ml-1" />
                         </Button>
                     </div>
-                    <Button variant="outline" className="border-slate-600 text-slate-300 w-full md:w-auto" onClick={() => onOpenChange(false)}>
+                    <Button
+                        variant="outline"
+                        className="border-border text-foreground bg-background hover:bg-muted font-medium w-full md:w-auto"
+                        onClick={() => onOpenChange(false)}
+                    >
                         Close Window
                     </Button>
                 </div>

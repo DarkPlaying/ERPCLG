@@ -1,22 +1,25 @@
-import { useTheme } from "next-themes";
+import { useTheme } from "@/components/ThemeProvider";
 import { Toaster as Sonner, toast } from "sonner";
 
 type ToasterProps = React.ComponentProps<typeof Sonner>;
 
 const Toaster = ({ ...props }: ToasterProps) => {
-  const { theme = "system" } = useTheme();
+  const { theme = "dark" } = useTheme();
+  const isDark = theme === "dark";
 
   return (
     <Sonner
-      theme={theme as ToasterProps["theme"]}
+      theme={isDark ? "light" : "dark"}
       className="toaster group"
       toastOptions={{
         classNames: {
-          toast:
-            "group toast group-[.toaster]:bg-background group-[.toaster]:text-foreground group-[.toaster]:border-border group-[.toaster]:shadow-lg",
-          description: "group-[.toast]:text-muted-foreground",
-          actionButton: "group-[.toast]:bg-primary group-[.toast]:text-primary-foreground",
-          cancelButton: "group-[.toast]:bg-muted group-[.toast]:text-muted-foreground",
+          toast: isDark
+            ? "group toast !bg-white !text-black !border-zinc-200 !shadow-2xl font-semibold"
+            : "group toast !bg-black !text-white !border-zinc-800 !shadow-2xl font-semibold",
+          description: isDark ? "!text-zinc-600 font-normal" : "!text-zinc-400 font-normal",
+          actionButton: isDark ? "!bg-black !text-white font-medium" : "!bg-white !text-black font-medium",
+          cancelButton: isDark ? "!bg-zinc-200 !text-black font-medium" : "!bg-zinc-800 !text-white font-medium",
+          closeButton: isDark ? "!bg-white !text-black !border-zinc-300" : "!bg-black !text-white !border-zinc-700",
         },
       }}
       {...props}
@@ -25,3 +28,4 @@ const Toaster = ({ ...props }: ToasterProps) => {
 };
 
 export { Toaster, toast };
+
